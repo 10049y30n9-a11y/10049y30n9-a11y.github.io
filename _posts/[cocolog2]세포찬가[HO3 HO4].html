@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html><html style="box-sizing: border-box;padding: 0;margin: 0"><head style="box-sizing: border-box">
+    <meta charset="UTF-8" style="box-sizing: border-box">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" style="box-sizing: border-box">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" style="box-sizing: border-box">
+</head>
+<body style="box-sizing: border-box;padding: 0;margin: 0">
+<style style="box-sizing: border-box">
+    html, body{padding: 0; margin: 0;}
+    * {box-sizing: border-box;}
+    #cclog_ccf .ccl_inWrap {font-size: 15px; letter-spacing: -.5px; color: #ffffff;}
+
+    #cclog_ccf .ccl_inWrap .ccl_tab {width: 100%; background: #27262C; position: relative;}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_main:before {background: none;}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_main{background: #27262C;}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_tab01:before {background: none;}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_tab01{background: #27262C;}
+    #cclog_ccf .ccl_inWrap .ccl_tabtitle {margin: 0; color: #bcbcc1; background: #474952; position: absolute; top: 10px; right: 10px; border-radius: 5px; padding: 5px; font-weight: 200}
+
+    #cclog_ccf .ccl_inWrap .ccl_player {display: flex; overflow: hidden; padding: 20px 0px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08)}
+    #cclog_ccf .ccl_inWrap .ccl_infoWrap .ccl_imgWrap {overflow: hidden; width: 40px; height: 40px; background-color: rgba(0, 0, 0, 0.31); float: left; border-radius: 5px; }
+    #cclog_ccf .ccl_inWrap .ccl_infoWrap .ccl_imgWrap img {width: 40px; height: auto;}
+    #cclog_ccf .ccl_inWrap .ccl_infoWrap .ccl_imgWrap:not(:has(img)) {opacity: 0;}
+    #cclog_ccf .ccl_inWrap .ccl_textWrap {float: left; line-height: 1.6; margin-left: 20px; margin-right: 20px;}
+    #cclog_ccf .ccl_inWrap .ccl_textWrap .ccl_Uname {margin: 0; font-weight: 800;}
+    #cclog_ccf .ccl_inWrap .ccl_textWrap .ccl_Utext {margin: 0; font-weight: 400; color: #59595D}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_main .ccl_textWrap .ccl_Utext {color: #FFFFFF;}
+    #cclog_ccf .ccl_inWrap .ccl_tab.ccl_tab01 .ccl_textWrap .ccl_Utext {color: #FFFFFF;}
+
+    #cclog_ccf .ccl_inWrap .ccl_player.system {padding: 0px; border-color: #313033 !important; background: #33313B; text-align: center; justify-content: center}
+    #cclog_ccf .ccl_inWrap .ccl_player.system .ccl_infoWrap {display: none;}
+    #cclog_ccf .ccl_inWrap .ccl_player.system .ccl_textWrap {margin-left: 0; padding: 10px 20px}
+    #cclog_ccf .ccl_inWrap .ccl_player.system .ccl_textWrap .ccl_Uname {color: #858296; font-size:0.86em; letter-spacing: 1px; padding: 3px 8px; border-radius: 15px; background: #000000}
+    #cclog_ccf .ccl_inWrap .ccl_player.system .ccl_textWrap .ccl_Utext {margin-top: 5px; color: #908E9A; letter-spacing: -1px}
+
+    #cclog_ccf .ccl_inWrap .ccl_main .ccl_player.narrator {padding: 0px; text-align: center; justify-content: center;}
+    #cclog_ccf .ccl_inWrap .ccl_main .ccl_player.narrator .ccl_infoWrap {display: none;}
+    #cclog_ccf .ccl_inWrap .ccl_main .ccl_player.narrator .ccl_textWrap {margin-left: 0; padding: 10px 20px}
+    #cclog_ccf .ccl_inWrap .ccl_main .ccl_player.narrator .ccl_textWrap .ccl_Uname {display: none;}
+    #cclog_ccf .ccl_inWrap .ccl_main .ccl_player.narrator .ccl_textWrap .ccl_Utext {margin-top: 5px; letter-spacing: -1px}
+
+</style>
+<div class="cclog_wrap" id="cclog_ccf" style="box-sizing: border-box">
+    <div class="ccl_inWrap" style="box-sizing: border-box;font-size: 15px;letter-spacing: -.5px;color: #ffffff">
+        <div class="ccl_tab ccl_main" style="box-sizing: border-box;width: 100%;position: relative;background: #27262C">
+            <p class="ccl_tabtitle" style="box-sizing: border-box;margin: 0;color: #bcbcc1;background: #474952;position: absolute;top: 10px;right: 10px;border-radius: 5px;padding: 5px;font-weight: 200">메인</p>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯.<br style="box-sizing: border-box">(비틀거리는 걸음으로 유진 앞으로 걸어간다. 물끄러미⋯⋯.)<br style="box-sizing: border-box">⋯⋯사람이란. 왜 이다지도 약한 존재인 건지. (그 자리에서 주저앉는다. 무의식적으로 행하는 행위가 있다. 배를 꾹⋯ 막아본다거나.)<br style="box-sizing: border-box">(그 날의 사건 이후, 아그네스가 단 하나. 목을 맨 행위가 하나 있다. 어떤 상황에서도⋯ 평정심을 잃지 않을 것. 사람의 목숨이 위태로운 상황에선 모든 것이 무용하였기에. 매사 무력한 동시에 무력하기 싫었다. 더 이상 무언가를 잃는 것 또한⋯⋯. 열일곱. 그 날의 잔상이 눈 앞을 어지럽힌다.)<br style="box-sizing: border-box">⋯⋯죽지 마, 유진.<br style="box-sizing: border-box">(죽을 정도의 상처인지 아닌지는 관심 없다. 그저, 눈 앞의 이가 당장⋯ 죽지 않았으면 할 뿐이니. 이래서, 정 주는 건 최악이라니까⋯⋯.)<br style="box-sizing: border-box">CC(+2)&lt;=75  응급처치 (1D100&lt;=75) 보너스, 패널티 주사위[2] ＞ 5, 15, 15 ＞ 5 ＞ 대단한 성공</p>
+                </div>
+            </div>
+            <div class="ccl_player narrator" style="box-sizing: border-box;display: flex;overflow: hidden;border-bottom: 1px solid rgba(255,255,255,0.08);padding: 0px;text-align: center;justify-content: center">
+                <div class="ccl_infoWrap" style="box-sizing: border-box;display: none">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px;opacity: 0"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-right: 20px;margin-left: 0;padding: 10px 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;display: none;color: #888888"> </p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF;margin-top: 5px;letter-spacing: -1px">추가로 의료 판정이 가능합니다.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">CC(+2)&lt;=21  의료 (1D100&lt;=21) 보너스, 패널티 주사위[2] ＞ 72, 72, 82 ＞ 72 ＞ 실패</p>
+                </div>
+            </div>
+            <div class="ccl_player narrator" style="box-sizing: border-box;display: flex;overflow: hidden;border-bottom: 1px solid rgba(255,255,255,0.08);padding: 0px;text-align: center;justify-content: center">
+                <div class="ccl_infoWrap" style="box-sizing: border-box;display: none">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px;opacity: 0"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-right: 20px;margin-left: 0;padding: 10px 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;display: none;color: #888888"> </p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF;margin-top: 5px;letter-spacing: -1px">유진, 체력 1점을 회복하고 정신을 차립니다. (차리기 싫으면 안 차려도 됨)<br style="box-sizing: border-box">응급처치 덕에 심각한 외상은 막았습니다.</p>
+                </div>
+            </div>
+            <div class="ccl_player system" style="box-sizing: border-box;display: flex;overflow: hidden;border-bottom: 1px solid rgba(255,255,255,0.08);padding: 0px;border-color: #313033;background: #33313B;text-align: center;justify-content: center">
+                <div class="ccl_infoWrap" style="box-sizing: border-box;display: none">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px;opacity: 0"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-right: 20px;margin-left: 0;padding: 10px 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #858296;font-size: 0.86em;letter-spacing: 1px;padding: 3px 8px;border-radius: 15px;background: #000000">system</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;margin-top: 5px;color: #908E9A;letter-spacing: -1px">[ 맥 세네트 ] HP : 7 → 8</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(멍하니 눈 깜박인다. 시야가 흐리다. 무슨 일이 있었던가? 눈앞을 가린 백색은⋯⋯)<br style="box-sizing: border-box">(병원의 천장과도 같고, 정신을 잃기 직전의 풍경과도 같아. 기억이 회복된 직후 통증 또한 몰려온다.)<br style="box-sizing: border-box">⋯⋯헉,<br style="box-sizing: border-box">윽, 씹⋯⋯.<br style="box-sizing: border-box">⋯⋯.<br style="box-sizing: border-box"><br style="box-sizing: border-box">아그네스 씨?<br style="box-sizing: border-box">(강하게 복부를 압박하는 손에 일어나고 싶어도 그럴 여력이 없다. 그저 시야에 들어오는 백발만 눈에 담았다.)<br style="box-sizing: border-box">⋯⋯대답을.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯유진.</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(대답 대신 짧게 신음 흘렸다.)<br style="box-sizing: border-box">무슨 일이 있었던 겁니까?⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(손으로는 복부 여전히 막아둔 채, 몸만 슬 기울여 시선 맞춘다. 당신 시야에 내 얼굴이라거나 머리카락 외에는 들어오지 않도록⋯⋯.)<br style="box-sizing: border-box">⋯⋯.<br style="box-sizing: border-box">⋯⋯아무런 일도. 없었으니까.<br style="box-sizing: border-box">생각하지 마세요⋯⋯.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ccl_inWrap" style="box-sizing: border-box;font-size: 15px;letter-spacing: -.5px;color: #ffffff">
+        <div class="ccl_tab ccl_tab01" style="box-sizing: border-box;width: 100%;position: relative;background: #27262C">
+            <p class="ccl_tabtitle" style="box-sizing: border-box;margin: 0;color: #bcbcc1;background: #474952;position: absolute;top: 10px;right: 10px;border-radius: 5px;padding: 5px;font-weight: 200">HO34</p>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">그럴 수가 있나.<br style="box-sizing: border-box">움직일 수가 없으니 할 수 있는 게 생각 뿐이라⋯⋯.<br style="box-sizing: border-box">그쪽이 말하지 않아도 떠오르는 것을 어찌합니까?<br style="box-sizing: border-box">상황 파악을 위해⋯⋯ (잠시 쉬었다.)<br style="box-sizing: border-box">⋯⋯들어야겠는데요.<br style="box-sizing: border-box">(푸른 눈은 꽤나 안정에 도움이 되었다.)<br style="box-sizing: border-box"><br style="box-sizing: border-box">하하⋯⋯.<br style="box-sizing: border-box">제가 눈 돌리지 말아야 하는 이유가 있는 거겠지요?<br style="box-sizing: border-box">아그네스 씨는 아닌 것처럼 도움 주는 재주가 있으십니다⋯⋯.<br style="box-sizing: border-box">정작 도우러 온 것은 이쪽인데도? (웃음을 닮은 날숨.)<br style="box-sizing: border-box">이런 상황에서 말씀드리기엔 조금 민망합니다만⋯⋯.<br style="box-sizing: border-box">다시 소개드리겠습니다.<br style="box-sizing: border-box">세르반 마이어스, 의 부탁으로 찾아왔습니다.</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">경관, 유진 헤이스팅스입니다.<br style="box-sizing: border-box">아그네스 블레어 양.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯.<br style="box-sizing: border-box">아무런 생각도 하지 마세요. 그냥, 저만 보세요. 오롯이⋯⋯.<br style="box-sizing: border-box">그게, 당신이 살 수 있는 방법이니까⋯⋯. (과연 그럴까? 언제나 정답은 모르는 법이다⋯.)<br style="box-sizing: border-box">(그러다 세르반 마이어스. 이름이 나오면 표정 굳는다.) ⋯⋯세르반, 오빠의. 부탁으로⋯?<br style="box-sizing: border-box">⋯⋯어디까지, 알고 있어?<br style="box-sizing: border-box">전부?<br style="box-sizing: border-box">(사고가 어지럽다. 시야가 흔들린다. 기분이 불쾌했다. 그보다도 몸을 잠식하는 체념이⋯⋯.) ⋯⋯아냐, 아냐.<br style="box-sizing: border-box">살아있으니까, 됐어요⋯⋯.<br style="box-sizing: border-box">죽지 마⋯.<br style="box-sizing: border-box">기절하지도 마⋯⋯.<br style="box-sizing: border-box">인간이란, 너무나도 약한 생명체니까⋯⋯.<br style="box-sizing: border-box">⋯⋯세르반 오빠의 부탁이 뭐였어?</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">글쎄요. (창백한 안색으로도 눈 휘었다.)<br style="box-sizing: border-box">블레어 양.<br style="box-sizing: border-box">당신이 이곳에 들어온 것도, 목적이 있어서겠지만⋯⋯.<br style="box-sizing: border-box">너무 무모한 일이었습니다.<br style="box-sizing: border-box">당신 혼자서 무엇을 하시겠다고?<br style="box-sizing: border-box">지금 상황만 보아도 빤하지 않습니까⋯⋯.<br style="box-sizing: border-box">(그러나, 상대 얼굴 보다가는⋯⋯.)<br style="box-sizing: border-box">남이 죽는 것은 보기 힘들어하면서, 왜 제 목숨은 아끼지 않습니까?<br style="box-sizing: border-box">참⋯⋯.<br style="box-sizing: border-box">⋯⋯걱정 마세요.<br style="box-sizing: border-box">사람 목숨은 생각보다 질기답니다.<br style="box-sizing: border-box">(말대로, 미미하게 찌푸려진 눈썹을 제하고서는 제법 멀쩡한 듯한 낯이다.)<br style="box-sizing: border-box">(침묵하다가.)<br style="box-sizing: border-box">제가 돕지요.<br style="box-sizing: border-box">무슨 목적이 당신의 생을 그리 가볍게 만드는지⋯⋯.<br style="box-sizing: border-box">(유진 헤이스팅스는 남의 맹목을 아무렇지 않게 넘길 수 있는 류의 인간이 아니라서.)<br style="box-sizing: border-box">⋯⋯알아야겠습니다.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯살아있어도 의미 없는 삶이었어요.<br style="box-sizing: border-box">살아있어서는 안 되는 삶이었어요.<br style="box-sizing: border-box">저 혼자 살아남아서는 안 되는 일이었다고⋯⋯.<br style="box-sizing: border-box">그러니까, 남에게 의탁하려고⋯⋯.<br style="box-sizing: border-box">(무의식에 유진의 배 강하게 압박한다. 본인이 그랬다는 자각조차 없다.) 사람 목숨 질기다는 건 그 누구보다 내가 제일 잘 알아⋯.<br style="box-sizing: border-box">내가, 그 질긴 목숨으로 살아남은 유일한 생이니⋯⋯.<br style="box-sizing: border-box">당신. 알아요?</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">무엇을.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">사람의 심장 박동이 들리지 않는 건 아주 오랜 시간이 걸려요.<br style="box-sizing: border-box">당장이라도 꺼질 것 같은 숨소리가 영원히 이어져요⋯⋯.<br style="box-sizing: border-box">아그네스. 괜찮아. 우리 딸. 괜찮아⋯⋯. 하는 부모님의 목소리가 아직도 귀에 아른거려⋯⋯.<br style="box-sizing: border-box">꺼져가는 숨소리, 옅어지는 심장 박동. 그 사이에서 삶을 부지한 소녀를 아시나요⋯⋯.<br style="box-sizing: border-box">내가 그 날 피크닉을 가자 하지만 않았어도.<br style="box-sizing: border-box">모든 원죄는 나에게 있어요.<br style="box-sizing: border-box">버러지 같고, 끔찍한 삶이니까⋯⋯.<br style="box-sizing: border-box">도와주겠다고 했죠.<br style="box-sizing: border-box">(문득, 고개 더 숙인다. 숨이 닿을 정도로. 어쩌면 눈물 두어 방울이 유진의 얼굴에 떨어졌을지도 모르는 일이다⋯⋯.)<br style="box-sizing: border-box">저, 죽음을 희망해요.<br style="box-sizing: border-box">저, 죽고 싶어요⋯⋯.<br style="box-sizing: border-box">누군가가 이어준 삶을 내 손으로 직접 버리자니 용기가 안 났어요⋯⋯.<br style="box-sizing: border-box">그래서 이 곳에 의탁했어⋯⋯.<br style="box-sizing: border-box">나는 내 죽음 말곤 아무런 관심도 없어⋯⋯. 그런데. 그런데. 당신. 계속해서 치근덕 거리고⋯⋯.<br style="box-sizing: border-box">(몸을 잠식하는 체념감이 사고를 멎게 만든다.) 이젠, 아무래도 좋아⋯⋯.<br style="box-sizing: border-box">죽는 것도, 사는 것도 무용해요⋯⋯.<br style="box-sizing: border-box">(힘 빠진 몸은 그대로 숙여져, 이마끼리 살짝 부딪힌다.) 당신. 무엇을 도울 수 있나요?<br style="box-sizing: border-box">이젠 모든 게 무용해진 내게 무엇을 해줄 수 있는데⋯?</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(복부에 가해지는 힘은 당시 그가 느꼈을 절망의 무게와도 같은가. 흘러나온 신음이 다시금 웃음이 되고.)<br style="box-sizing: border-box">죽여 달라느니.<br style="box-sizing: border-box">경관에게 하기에는 부적절한 부탁 같지 않나요⋯⋯.<br style="box-sizing: border-box">아그네스 블레어.<br style="box-sizing: border-box">죽음은 도피입니다.<br style="box-sizing: border-box">외면으로 해결되는 일은 없습니다.<br style="box-sizing: border-box">당신은 그 일을 당신의 원죄라고 생각하는지 몰라도⋯⋯.<br style="box-sizing: border-box">내가 보기엔, 말입니다.<br style="box-sizing: border-box">복수를 해야 하는 일 아닙니까?<br style="box-sizing: border-box">이것도 경관으로서 하기엔 부적절한 말이긴 하네요! (소리 키웠다가.)<br style="box-sizing: border-box">(고통으로 인해 수축한 동공이 아그네스 블레어를 직시한다.)<br style="box-sizing: border-box">뭐, 그게 사람 목숨보다 중요하겠냐마는.<br style="box-sizing: border-box">그래, 그래서⋯⋯<br style="box-sizing: border-box">당신의 의욕, 삶의 이유⋯⋯ 무어라 이름 붙이든.<br style="box-sizing: border-box">영원히 그 어린 날의 아그네스 블레어로 살 수는 없습니다.<br style="box-sizing: border-box">숨이 붙어있는 한 인간은 변화하기 마련이니까.<br style="box-sizing: border-box">요 몇 개월 당신이 그러했듯.<br style="box-sizing: border-box">고로⋯⋯.<br style="box-sizing: border-box">바꿀 수 있지 않겠습니까?<br style="box-sizing: border-box">그러기 위해 저는 *치근덕거리고* 있는 거지요.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">먼저 돕겠다고 한 건 당신이잖아.<br style="box-sizing: border-box">그리 말 했으면 응당, 책임을 져야지⋯⋯.<br style="box-sizing: border-box">내가 죽은 이후의 일까지 신경 써야 할까요⋯?<br style="box-sizing: border-box">제게 있어, 죽음은 구원과도 같았어요. 이 비루먹은 삶을 끝낼 수 있는 유일한 탈출구였으니⋯.<br style="box-sizing: border-box">누구에게 복수할까요. 그 날. 내 열일곱의 생일 날⋯⋯.<br style="box-sizing: border-box">피크닉을 가자고 한 것도 나였고, 운전하는 아빠에게 말을 건 것도 나였고⋯⋯.<br style="box-sizing: border-box">그런 못난 딸임에도 나 하나 살리겠다고 두 분이 달라 붙어서 나를 구해냈어⋯.<br style="box-sizing: border-box">(유진의 배를 누르던 손을 떼어낸다. 그 손에 묻은 건 망설임이다⋯. 지독한 삶이야. 당신도, 나도⋯⋯.)<br style="box-sizing: border-box">⋯⋯그 어린 날의 아그네스 블레어로 살지 않으면.<br style="box-sizing: border-box">무엇으로 살 수 있는데⋯?<br style="box-sizing: border-box">맥 세네트.<br style="box-sizing: border-box">⋯⋯헤이스팅스.<br style="box-sizing: border-box">⋯⋯⋯유진.<br style="box-sizing: border-box">나를 어떻게 바꾸고 싶어?<br style="box-sizing: border-box">그 *치근덕거림*의 끝에 무엇이 있기를 바라?<br style="box-sizing: border-box">답, 좀 해⋯.<br style="box-sizing: border-box">나랑 뭘 어쩌고 싶은 건데⋯?<br style="box-sizing: border-box">죽고 싶은 여자 하나 데려다가, 무엇을하고 싶어⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">답한다면요⋯⋯.<br style="box-sizing: border-box">제 뜻대로, 제 바람대로 바뀌어 주실 텝니까?<br style="box-sizing: border-box">나쁘지 않다는 생각이 드는 건 역시 체내 혈액량 부족 때문일까요?<br style="box-sizing: border-box">뭐어⋯⋯<br style="box-sizing: border-box">그렇다면야⋯⋯.<br style="box-sizing: border-box">블레어 양?<br style="box-sizing: border-box">제 삶을 담보로 당신 삶 하나를 저당잡아도 되겠습니까?<br style="box-sizing: border-box">아무래도, 삶의 무게를 중히 여기시는 것 같기에.<br style="box-sizing: border-box">보세요.<br style="box-sizing: border-box">(복부 위에 한 손을 덮었다. 보란 듯이.)<br style="box-sizing: border-box">(제 손으로 안을 헤집는다. 뜨거운 액체가 손을 적셔 고개 젖힌다.)<br style="box-sizing: border-box">당신, 지혈해 주지 않으면⋯⋯<br style="box-sizing: border-box">금방 죽지 않겠습니까?<br style="box-sizing: border-box">원죄를 더 늘리고 싶으신 건 아니겠지요.<br style="box-sizing: border-box">신뢰에 보답해 주십시오.<br style="box-sizing: border-box">블레어 양.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯당신, 제대로 미쳤구나.</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">미치지 않고서는 살 수 없는 세계 같기에.*</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">내 삶은, 당신 같은 사람의 삶을 담보 삼아 저당잡을 만큼 의미있는 삶이 아냐⋯⋯.<br style="box-sizing: border-box">내 삶 여섯을 걸어도, 당신 삶 하나의 값어치도 안 될 걸⋯.<br style="box-sizing: border-box">그런 여자를 위해, 당신 삶을 담보 삼으면서까지 해야할 게 있어?<br style="box-sizing: border-box">어줍잖은 동정심이라거나, 정의감이라면 이쯤 그만두는 게 좋을 걸요⋯⋯.<br style="box-sizing: border-box">아깝잖아요. 나를 위해 그런 걸 거는 건⋯⋯.<br style="box-sizing: border-box">(반항심이 든다. 당장이라도 떨쳐내고 저 어딘가로 도망가고 싶었다. 정신을 좀먹은 체념이 이도저도 못하게 만들어서, 한참 동안 유진과 가만히 시선 교환할 뿐이다. 지독한 남자 같으니라고⋯⋯.) 미쳤어.<br style="box-sizing: border-box">유진, 정말 최악의 남자야⋯⋯.<br style="box-sizing: border-box">치근덕거림이 과해⋯⋯. (속이 좋지 않다. 신물이 올라올 것만 같았다. 으엑⋯. 겨우겨우 참아내고 몸 일으킨다.)<br style="box-sizing: border-box">⋯⋯이딴 게 신뢰라고? 이런 신뢰, 들어본 적 없어. (헤집는 유진의 손 치워낸다. 이후 눈물 뚝뚝 흘리며 복부 지혈했다.)<br style="box-sizing: border-box">원하는 걸 말 해.<br style="box-sizing: border-box">죽지 마⋯⋯.<br style="box-sizing: border-box">들어줄, 테니까⋯⋯.<br style="box-sizing: border-box">뭐가 됐든 들어줄 테니까⋯⋯.<br style="box-sizing: border-box">자해하지도 마.<br style="box-sizing: border-box">제발, 좀⋯⋯.<br style="box-sizing: border-box">유진, 헤이스팅스⋯⋯.<br style="box-sizing: border-box">내 삶을 저당잡아 무엇을 하고 싶어?<br style="box-sizing: border-box">줄게. 전부⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">당신 입으로 말했으면서?<br style="box-sizing: border-box">(소리 없이 입가에 미소 건다.)<br style="box-sizing: border-box">어줍잖은 동정심으로 이런 짓을 할 리가 없잖습니까⋯⋯.<br style="box-sizing: border-box">미친 이를 해석하려 들지 마세요.<br style="box-sizing: border-box">당신까지 광기의 굴레에 빠져 버리기 전에.<br style="box-sizing: border-box">이제 아셨습니까?<br style="box-sizing: border-box">진작에 최악이라고 생각하고 있는 줄 알았더니.<br style="box-sizing: border-box">아니라니 기쁩니다.<br style="box-sizing: border-box">아그네스 블레어, 당신이 이렇게 움직여 줄 거라는 확신⋯⋯.<br style="box-sizing: border-box">그것 또한 신뢰가 아닌가?<br style="box-sizing: border-box">저는 그렇게 생각한답니다.<br style="box-sizing: border-box">⋯⋯분명, 확답이지요?<br style="box-sizing: border-box">원하는 건⋯⋯<br style="box-sizing: border-box">⋯⋯.<br style="box-sizing: border-box">답을 조금 유예하도록 할까요⋯⋯.<br style="box-sizing: border-box">⋯⋯⋯⋯.<br style="box-sizing: border-box">(그 이후 답이 없다. 기절이다.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">처음 말을 걸 때부터 무시했어야만 했어⋯.<br style="box-sizing: border-box">어줍짢은 친절 같은 거 베풀지 말았어야 했다고⋯⋯.<br style="box-sizing: border-box">처음 와 헤매는 꼴이 불쌍해서⋯ 몇 번 상대한 게 고작이었는데.<br style="box-sizing: border-box">⋯⋯이런 최악의 남자인 줄 알았다면.<br style="box-sizing: border-box">⋯⋯이런 미친 남자인 줄 알았다면.<br style="box-sizing: border-box">당신 같은 사람한테 조금이라도 마음 같은 거 열지 않았을 거야. (결국, 아그네스 또한 사람이다. 그 날 이후 모든 걸 놓아버렸다 해도. 계속해서 끝없이 치대는 이를 미워하긴 어려운 법이니까⋯⋯.)<br style="box-sizing: border-box">미친 사람.<br style="box-sizing: border-box">⋯⋯확답이야. 삶을 담보로 건 이에게 거짓 같은 거 내뱉을 리 없잖아.<br style="box-sizing: border-box">(그러다가, 문득 끊긴 말소리에 눈 뜬다.)<br style="box-sizing: border-box">⋯⋯유진?<br style="box-sizing: border-box">(황급히 얼굴 살핀다. 피 묻은 손 덜덜 떨어가며 뺨 만져본다.) 유진⋯?<br style="box-sizing: border-box">끅⋯⋯. (숨이 턱 막히는 것만 같았다. 두 번 다시 누군가의 죽음 같은 거 보고 싶지 않아. 바라지 않아⋯⋯.)<br style="box-sizing: border-box">죽지 않겠다며⋯⋯. (덜덜 떨리는 손은 몇 번이고 바닥을 헛짚는다. 이후 무릎으로 기어가 유진의 심장 부근에 귀 가져다 댔다.)<br style="box-sizing: border-box">(쿵. 쿵⋯ 미약하게라도 뛰는 박동이 들렸다. 맥 빠지듯 힘이 풀린다.) 살아, 있어⋯.<br style="box-sizing: border-box">(찰나지만 영원 같은 시간이 흐른다. 단순히 기절한 것임을 알아채면 저보다 한참 큰 몸 끌어안고 웅얼거린다.) 살아있네⋯⋯.<br style="box-sizing: border-box">(그 부근에 얼굴 부빗거렸다. 알 수 없다. 이유 같은 거⋯. 알았다면 죽음 같은 거 희망할 리 없잖아⋯⋯.) ⋯⋯지독한 사람.<br style="box-sizing: border-box">유진 헤이스팅스 같은 거⋯⋯ 최악이야⋯.<br style="box-sizing: border-box">(꾸욱⋯ 끌어안는 힘 강해진다. 훌쩍⋯ 눈물 자국이 옷 적셨을지도 모르는 일이고⋯⋯.) 죽지 마⋯⋯.<br style="box-sizing: border-box">(이후는 기억이 거의 없다. 반쯤 품에 안고, 아니⋯ 끌고가듯이였나. 모르겠다. 아그네스를 움직이게 하는 것은⋯ 유진 헤이스팅스의 생존 하나였으니.) 살아서, 내 삶을 원하는 대로 주무르란 말야⋯⋯.<br style="box-sizing: border-box">(가는 내내 유진의 숨소리라거나, 심장 박동을 끊임 없이 확인한다. 아직, 아직 살아있어⋯⋯. 귓가에다가 닿지 않을 말 웅얼거린다.)<br style="box-sizing: border-box">길들여 놓고, 유기 같은 거 하지 말란 말야⋯⋯.<br style="box-sizing: border-box">책임져, 유진⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player narrator" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px;opacity: 0"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #888888"> </p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">당신은 기절한 유진을 안고 병원으로 달려간다.<br style="box-sizing: border-box">병원의 의료진들은 다급하게 유진을 들것에 싣고 수술실로 향한다.<br style="box-sizing: border-box">당신이 할 수 있는 것은 대기실에서 당신의 이름을 호명할 때까지 기다리는 것뿐일까.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(몸 웅크린 채로 양 손 꼭 잡는다. 제발. 신에게 무언가를 기도할 때는 제 죽음을 바랄 때 말곤 없었다. 그런 이에게, 이 무슨⋯⋯.) 유진⋯⋯.<br style="box-sizing: border-box">(부디, 그의 목숨이 붙어있기를. 멀쩡하게 돌아오기를 간절히 기원했다. 옅어지던 심장 소리가 아직도 귀에 선연해서. 무릎에 얼굴 묻는다.)<br style="box-sizing: border-box">제발⋯⋯.<br style="box-sizing: border-box">나, 버리고 가지 마⋯⋯.<br style="box-sizing: border-box">⋯⋯무사히 온다면, 전부 줄게.<br style="box-sizing: border-box">그러니까. 눈을 뜨고 내 이름을 불러요⋯⋯.<br style="box-sizing: border-box">얼른⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player narrator" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px;opacity: 0"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #888888"> </p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">몇 시간이 지났을까.<br style="box-sizing: border-box">대기실로 당신의 이름을 호명하는 소리가 들린다.<br style="box-sizing: border-box">간호사는 당신을 이끌고 입원 병동으로 향한다.<br style="box-sizing: border-box">아그네스, 당신은 병실을 지나치던 중에 익숙한 이름. '그레이스'라는 명패를 발견할지도 모른다.<br style="box-sizing: border-box">하지만 지금 중요한 것은... 그의 상태겠지.<br style="box-sizing: border-box">간호사가 유진이 입원한 병실을 안내한다. 문을 여는 것은 당신 몫이다.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(망설임은 없다. 문고리 열어 젖힌 후, 막힌 숨 내뱉는 사람처럼 그의 이름 부른다.) ⋯⋯유진!</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(제 이름 불리면, 기다렸다는 듯, 등받이에 몸 편히 뉘인 채 고개 들어 아그네스를 바라본다.)<br style="box-sizing: border-box">(아무 일도 없었다는 것처럼 여상한 낯으로, 매끄럽게 웃는다.)<br style="box-sizing: border-box">오셨습니까?<br style="box-sizing: border-box">아그네스.<br style="box-sizing: border-box">죽고 싶다는 마음은 조금 바래셨는지요.<br style="box-sizing: border-box">차암, 이럴 생각까진 없었는데⋯⋯.<br style="box-sizing: border-box">말이 통하지 않는 이에겐 충격 요법이 최고라지 않습니까.<br style="box-sizing: border-box">(물론, 농이다.)<br style="box-sizing: border-box">내 한 목숨, 당신 삶 여섯보다도 무거울 거라고 했던가?<br style="box-sizing: border-box">그렇다면 당신 삶 하나쯤 이제 내 것이라고 해도 되겠지?</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯뭐가 그렇게 뻔뻔해요?<br style="box-sizing: border-box">(입술 몇 번 짓씹는다. 여전히 문고리 꾹⋯ 움켜쥐었다가 놓는다. 비틀거리는 걸음으로 유진 앞에 서 물끄러미⋯⋯.) ⋯⋯유진.<br style="box-sizing: border-box">⋯⋯당신. 정말 최악의 남자야.<br style="box-sizing: border-box">(이후 유진의 한 손 꼭 쥐어 제 뺨에 가져다댔다.) 최악이라고⋯⋯.<br style="box-sizing: border-box">다음에도 또 이런 짓 하면⋯⋯.<br style="box-sizing: border-box">정말 용서하지 않을 거야⋯⋯.<br style="box-sizing: border-box">(반쯤 주저앉듯 유진에게 기댄다. 여전히 심장 부근에 귀 가져다 댄 채.) 살아있어⋯⋯.<br style="box-sizing: border-box">(이후 눈 감는다. 심장 부근에 가볍게 얼굴 문지르고⋯.) 알아서 해⋯⋯.<br style="box-sizing: border-box">당신 마음대로 해도 좋으니까.<br style="box-sizing: border-box">전부 가져가도 좋으니까⋯⋯.<br style="box-sizing: border-box">곁에 있어⋯⋯.<br style="box-sizing: border-box">당신이 길들였으니까. 책임져. 유진⋯.<br style="box-sizing: border-box">유기 같은 거 하지 말라고⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">네, 유진이지요.<br style="box-sizing: border-box">그 뒤는 잠시 묻어둡시다.<br style="box-sizing: border-box">보는 눈이 많아.<br style="box-sizing: border-box">아니면⋯⋯<br style="box-sizing: border-box">(뺨 타고 파고든 손이 네 뒷머리를 받치고 그대로 끌어당겼다.)<br style="box-sizing: border-box">(속삭인다.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p003" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">유진 헤이스팅스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">내가 당신을 구했잖아요.<br style="box-sizing: border-box">블레어 양.<br style="box-sizing: border-box">유진 헤이스팅스가.<br style="box-sizing: border-box">(허리 숙여 귓가에 그렇게 읊조리고는, 다시 뒤로 기대 눕는다.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">그러니 책임져야지.<br style="box-sizing: border-box">당신 삶 하나를 영원히 업을 생각으로 한 말이랍니다.<br style="box-sizing: border-box">그 순간부터, 그 정도 각오는 있었다고요⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">구명 같은 거 바란 적 없어. 나는 그대로 죽어버려도 좋은 여자였는데⋯⋯.<br style="box-sizing: border-box">당신이 이렇게 만든 거니까.<br style="box-sizing: border-box">당신 목숨과 맞바꿔, 살게 만든 생이니까⋯⋯.<br style="box-sizing: border-box">(침대 양 손으로 짚고 일어난다. 이후 그의 귓가에 작게 속삭였다.)<br style="box-sizing: border-box">유진 헤이스팅스.<br style="box-sizing: border-box">지금 이 순간부터, 당신은 나를 죽을 때까지 책임져야 할 거야⋯⋯.<br style="box-sizing: border-box">무슨 일이 있어도. 내가 어떤 짓을 저질러도⋯⋯.<br style="box-sizing: border-box">당신은 나를 책임지면서 살아⋯⋯.<br style="box-sizing: border-box">그러겠다며.<br style="box-sizing: border-box">볼품 없고 글러먹은 생인 나를⋯⋯.<br style="box-sizing: border-box">끌어안아 여기까지 데려온 것도 당신이니까. 전부⋯⋯. (결국엔 의탁이다. 지금은 눈 앞의 남자가 살아있는 것에 기뻐하기로 했다.)<br style="box-sizing: border-box">어떤 진실을 알게 된다 하더라도.<br style="box-sizing: border-box">유진. 당신은 나를 못 버려⋯⋯. (그의 목덜미 부근에 얼굴 파묻고 부빗⋯.)<br style="box-sizing: border-box">버리면 가만두지 않을 거야⋯⋯.<br style="box-sizing: border-box">생과 사를 엮은 관계니까, 우리⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">예. 아그네스.<br style="box-sizing: border-box">무고한 여자.<br style="box-sizing: border-box">책임지겠다고 맹세합니다.<br style="box-sizing: border-box">당신은 내 것이니 내가 가치 있게 만들어야지.<br style="box-sizing: border-box">(흰 머리카락 내려다보다, 네 목덜미 한 손으로 감싸쥐었다.)<br style="box-sizing: border-box">제 명예에 누가 되는 일은 하지 마세요.<br style="box-sizing: border-box">정의하자면⋯⋯<br style="box-sizing: border-box">첫 번째 명령?<br style="box-sizing: border-box">별로 듣기에 좋지 않으니, 약속으로 이름 붙입시다.<br style="box-sizing: border-box">어떤가요? (의사를 되묻지만, 선지에 거절이라고는 없음을 안다.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯소유격이야?<br style="box-sizing: border-box">⋯⋯.<br style="box-sizing: border-box">⋯.<br style="box-sizing: border-box">⋯거절할 수도 없는데. 이게 어딜 봐서 약속이야.<br style="box-sizing: border-box">당신, 정말 최악의 사람이라구요⋯. (물끄러미 내려다 본다. 제 목덜미 쥔 손 바라 보다가 가만 눈 감았다.)<br style="box-sizing: border-box">⋯유진이 그걸 바란다면. (반쯤 포기한 목소리다. 의탁. 의존⋯⋯. 결국엔 또.)<br style="box-sizing: border-box">다만, 하나 맹세해.<br style="box-sizing: border-box">과거에 있던 일로 뭐라하지 않겠다고⋯⋯.<br style="box-sizing: border-box">그 때의 나는, 당신을 만나기 전의 아그네스니까.<br style="box-sizing: border-box">죽고 싶은 여자였으니까⋯⋯.<br style="box-sizing: border-box">비난하지 않겠다고. 유기하지 않겠다고 해요⋯⋯.<br style="box-sizing: border-box">그러면. 말, 잘 들을 테니까⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">아그네스.<br style="box-sizing: border-box">이미 말하지 않았습니까?<br style="box-sizing: border-box">(“무고한 여자.” 반복했다.)<br style="box-sizing: border-box">난 당신에게 면죄부를 준 겁니다.<br style="box-sizing: border-box">*내가*. (경관으로서. 생략되었으나 충분히 알아들었을 터다.)<br style="box-sizing: border-box">*내 것*이 되었으니, 그 이전에 당신이 무엇이었든.<br style="box-sizing: border-box">이제는 중요하지 않다고나 할까⋯⋯.<br style="box-sizing: border-box">⋯⋯그렇게 되었군요!</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯.<br style="box-sizing: border-box">(죽음을 포기한 이에게는 또 다른 살아갈 의미가, 이유가 필요한 법이다. 어차피 믿을 것 없는 삶이고, 이 곳을 믿은 이유도 죽기 위함이었으니. 열일곱 그 날 이후 공허하고 텅 빈 삶이었다. 당신이 내게 *면죄부*를 주겠다면. 나를 당신의 *소유물*로 취급하겠다면. 나를 당신으로 채우겠다면. 나를 주무르겠다면⋯⋯.)<br style="box-sizing: border-box">⋯유진. (그의 손에 뺨 기대어 올려다 본다. 신을 믿는 사람 마냥. 눈동자에 들어찬 것은 맹목이다. 맹신이다. 저를 책임지겠다는 이에게 내보이는 순종이며⋯.)<br style="box-sizing: border-box">(그래, 당신을 내가 삶을 영위해야 하는, 내 모든 행동의 기준점으로 삼아볼까⋯⋯. 자아의 의탁이다.) 유진⋯⋯.<br style="box-sizing: border-box">(희미하게 웃는다. 모르겠다. 더는 그 무엇도 알 수가 없었다⋯. 눈 앞의 이에게 모든 걸 맡긴 채 그의 뒤만 따라 걷기로 결심한 여자다.) 착하게 굴게요⋯. 명예에 누가 되는 일 만들지 않도록.<br style="box-sizing: border-box">면죄부를 준다면. 당신이 기꺼이 그리 말한다면⋯⋯.<br style="box-sizing: border-box">(이후 그의 손가락 느릿하게 매만진다. 미소는 찰나다.)<br style="box-sizing: border-box">⋯새로운 이름을 지어주는 것도 나쁘지 않을 것 같은데. 유진과 이 약속을 나눈 이후부터의 아그네스는 아그네스가 아니니까⋯⋯.<br style="box-sizing: border-box">어때?<br style="box-sizing: border-box">⋯⋯나는 유진의 것이라며. 소유물에게, 새로운 이름을 붙여주는 건.<br style="box-sizing: border-box">응당 주인이 해야 할 일 아닌가요⋯⋯.<br style="box-sizing: border-box">모든 관계의 시작은, 이름 붙이는 행위에서 시작하잖아⋯⋯. (세례명일지도. 그런 생각하며 가만 올려다본다.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(한 번 더, *유진 헤이스팅스는 남의 맹목을 아무렇지 않게 넘길 수 있는 류의 인간이 아니라서*⋯⋯.)<br style="box-sizing: border-box">(거친 손과 부드러운 뺨이 맞닿으면, 그대로 턱을 감싸 쥐고 시선 피하지 못하게 한다.)<br style="box-sizing: border-box">(다 닳아버린 인간의 말끔한 얼굴을 보고 있노라면⋯⋯.)<br style="box-sizing: border-box">⋯⋯마지막으로 철회할 기회를 줄게요.<br style="box-sizing: border-box">지금 이 순간을 후회하지 않을 거라고 확신합니까?<br style="box-sizing: border-box">어떤 일을 겪더라도?<br style="box-sizing: border-box">아그네스.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯.<br style="box-sizing: border-box">(허공 더듬던 시선이 유진을 향한다. 맥 세네트라는 이름 같은 건 모른다. 아그네스는 눈 앞에 있는 남자를 *유진 헤이스팅스*라 인지할 뿐이다.) 유진.<br style="box-sizing: border-box">당신이야 말로 후회하지 않을 자신 있나요.<br style="box-sizing: border-box">나는 한 번 의존한 것은, 맹신한 것은⋯⋯ 죽을 때까지 가져가는 여자라서.<br style="box-sizing: border-box">끝낼 거라면 지금 끝내.<br style="box-sizing: border-box">나는 어떤 일을 겪더라도 후회하지 않을 거라고 자신해요⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯.<br style="box-sizing: border-box">그렇담.<br style="box-sizing: border-box">(“작별 인사를 해요. 마지막일지도 모르잖아요.”)<br style="box-sizing: border-box">아그네스⋯⋯ 로는 영원히 돌아오지 못하겠군요.<br style="box-sizing: border-box">관계의 시작이 이름 붙이는 데에서 비롯한다면.<br style="box-sizing: border-box">소개부터 하는 것이 도리겠지요?<br style="box-sizing: border-box">유진입니다.<br style="box-sizing: border-box">(이노센시아, *이노센트*, “이노.”)<br style="box-sizing: border-box">반가워요.</p>
+                </div>
+            </div>
+            <div class="ccl_player p002" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">아그네스</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">⋯⋯마지막 인사네요. 맥 세네트 씨.<br style="box-sizing: border-box">아그네스로 전하는 마지막 인사⋯⋯.</p>
+                </div>
+            </div>
+            <div class="ccl_player p004" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/86P04PwLb1TtmmqMYZLiVPJFOFO2/files/29306265cb78e2506a5717656336e267248e28897922bab3d23421766af2db83?t=1773065264421" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #0000ff">이노</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(가만 시선 맞춘다. 쨍한 푸른 눈동자가. 무엇 하나 담지 못하는 푸른 눈이⋯ 유진 헤이스팅스를 온전히 담아내고 있었다. 몇 번 깜빡이길 반복하다가 몸 기울여 속삭인다. 입꼬리에 희미하게 미소 걸렸을지도 모르는 일이고⋯⋯.) 이노라고 해. 유진 헤이스팅스.<br style="box-sizing: border-box">(금방 몸 떼어내고서는 유진의 심장 부근에 손 올렸다.) ⋯⋯이제, 잘 뛰네.<br style="box-sizing: border-box">(손 떼어내고서는 어리광 부리는 이마냥 그 부근에 머리 꿍. 가져다대고 눈 감았다.) 나는 이제, 유진의 것이니까⋯⋯.<br style="box-sizing: border-box">나 두고 죽지 마⋯.<br style="box-sizing: border-box">어디 가지도 말고⋯⋯.<br style="box-sizing: border-box">내 생 끝날 때까지 당신이 책임져야 해.<br style="box-sizing: border-box">우린 그런 약조를 하고, 생을 엮은 이들이니까⋯⋯.<br style="box-sizing: border-box">다음 생도 책임져달라 하진 않아.<br style="box-sizing: border-box">하지만⋯ 이번 생의 당신은, 나를 확실하게 길러야만 해⋯.<br style="box-sizing: border-box">당신이 날 버리거나 내가 다른 맹신할 것을 찾는 그 날이 *이노*가 죽는 날이니까.<br style="box-sizing: border-box">돌이킬 수 없어.<br style="box-sizing: border-box">후회하지도 마. 나 또한 후회하지 않으니⋯⋯.<br style="box-sizing: border-box">(아주 잠시간 그 자세 그대로 있었다. 찰나가 영원이길 희망한다. 부질 없는 것임을 앎에도⋯⋯.) 만족해?<br style="box-sizing: border-box">(느릿하게 몸 떼어내고서 시선 다시 한 번 맞춘다.)<br style="box-sizing: border-box">유진.<br style="box-sizing: border-box">⋯명심해요. 나는, 부모님이 내게 붙인 이름 대신.<br style="box-sizing: border-box">유진이 내게 붙이는 이름을 선택했음을⋯⋯.<br style="box-sizing: border-box">(애정 같은 게 아니다. 그저, 헌신이고 맹목이며 맹신이다⋯⋯. 당신이 내게 이름 붙인 그 순간부터 아그네스, 아니. 이노의 세계는 유진 헤이스팅스라는 이로 재구성 되는 것이었으니⋯⋯.) 당신 없이는 살아가지 않을 여자야.<br style="box-sizing: border-box">지독한 선택을 했네⋯⋯. (흐린 웃음소리가 흐른다. 그러길래 그냥 죽게 뒀어야지⋯⋯. 어쩔 수 없어. 당신이 나를 살리겠다며 당신 목숨 걸었으니, 나 또한 내 목숨 걸어 보답했을 뿐이야⋯⋯.)<br style="box-sizing: border-box">그럼에도 물어보자면.<br style="box-sizing: border-box">후회해? (여상하게 웃는 낯이다. 가볍고, 혼자 전부 털어버린 것 같은. 자아라거나, 주관 같은 건 전부 버렸으니.)</p>
+                </div>
+            </div>
+            <div class="ccl_player p001" style="box-sizing: border-box;display: flex;overflow: hidden;padding: 20px 0px 20px 20px;border-bottom: 1px solid rgba(255,255,255,0.08)">
+                <div class="ccl_infoWrap" style="box-sizing: border-box">
+                    <div class="ccl_imgWrap" style="box-sizing: border-box;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0, 0, 0, 0.31);float: left;border-radius: 5px"><img src="https://storage.ccfolia-cdn.net/users/8hoHXAuYskMfhXvxzwcwBmU06Ui2/files/c4c6b2122b7d64930a6530e5c2716fe918771fcecfba6d87aadfa9987f90ae64?t=1773069490568" style="box-sizing: border-box;width: 40px;height: auto"></div>
+                </div>
+                <div class="ccl_textWrap" style="box-sizing: border-box;float: left;line-height: 1.6;margin-left: 20px;margin-right: 20px">
+                    <p class="ccl_Uname" style="box-sizing: border-box;margin: 0;font-weight: 800;color: #000000">맥 세네트</p>
+                    <p class="ccl_Utext" style="box-sizing: border-box;margin: 0;font-weight: 400;color: #FFFFFF">(품에 기댄 이를 가만히 내려보다가, 옆으로 흩어진 머리카락 위에 손 얹는다. 결의 반대로 쓸어올려 손에 쥐고서는 손가락 사이로 흘러내리는 것을 두고 보았다.)<br style="box-sizing: border-box">(평소와 다를 바 없이 끌어당긴 입꼬리에 미미하게 힘이 들어간다. *결백, 무고, 무해, 순수⋯⋯* “잘 어울려요.”)<br style="box-sizing: border-box">(그리고, 이 한 단어 거듭 떠올리다 보면 깨닫는다.)<br style="box-sizing: border-box">역시, 일방적으로 받기만 하는 건 취향이 아닌가 봐요.<br style="box-sizing: border-box">(그래서, 유진 헤이스팅스는 *이노*가 제게 갖는 맹목에 부응할 수밖에 없었다. 그런 인간이다.)<br style="box-sizing: border-box">어떻게 후회하겠습니까?<br style="box-sizing: border-box">당신을 살리고자 했습니다.<br style="box-sizing: border-box">생명의 무게는 누구보다 잘 아니까요.<br style="box-sizing: border-box">구명에 후회하기에는, 지금껏 제가 겪어온 삶이⋯⋯<br style="box-sizing: border-box">(느릿하게 상체 일으켜 손 뻗었다.)<br style="box-sizing: border-box">당신의 숨이.<br style="box-sizing: border-box">나를 웃게 하는걸요.<br style="box-sizing: border-box">당신이 넘긴 짐이 참 무겁습니다.<br style="box-sizing: border-box">그만한 것을 떠넘겼으니, 이제 좀 숨 쉬기가 편합니까?<br style="box-sizing: border-box">(가볍게 댄 검지에 숨이 스치면,)<br style="box-sizing: border-box">(상대의 머리카락 퍽 애틋한 손길로 넘겨주고는.)<br style="box-sizing: border-box">내가 소유한 첫 생명이라는 것은⋯⋯.<br style="box-sizing: border-box">(수많은 낱말이 떠오르나, 하나만을 소중히 골라 뱉었다.)<br style="box-sizing: border-box">⋯⋯귀하네요.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body></html>
