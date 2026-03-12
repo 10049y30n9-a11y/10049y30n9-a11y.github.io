@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet v4.5</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Pretendard:wght@300;500;700&display=swap');
+        
+        :root { 
+            --sys-accent: #17F4E2; 
+            --sys-accent-alpha: rgba(23, 244, 226, 0.2); 
+            --bg-panel: rgba(255, 255, 255, 0.95);
+            --line-color: rgba(0, 0, 0, 0.15); 
+            --text-main: #222; 
+            --text-sub: #666; 
+            --blur-val: 12px; 
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.05); 
+            --font-main: 'Pretendard', sans-serif;
+            --font-code: 'JetBrains Mono', 'Pretendard', monospace; 
+        }
+        
+        [data-theme="dark"] { 
+            --bg-panel: rgba(25, 25, 25, 0.9);
+            --line-color: rgba(255, 255, 255, 0.2); 
+            --text-main: #e0e0e0; 
+            --text-sub: #b0b0b0; 
+            --shadow-soft: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .gfx-wrapper * { box-sizing: border-box; }
+        .gfx-wrapper { 
+            position: relative; 
+            width: 100%; 
+            height: auto;
+            min-height: 500px;
+            display: flex; 
+            flex-direction: column;
+            font-family: var(--font-main); 
+            color: var(--text-main); 
+            user-select: none; 
+            line-height: 1.5; 
+            overflow: visible;
+            transition: color 0.3s ease;
+            background: transparent;
+            border: none; 
+            padding: 2px;
+        }
+
+        .gfx-wrapper.dev {
+            height: auto !important;
+            max-height: none !important;
+            overflow-y: auto !important;
+            display: block;
+            min-height: 90vh;
+        }
+        
+        .ctrl-bar { 
+            flex-shrink: 0;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 12px; 
+            height: 44px; 
+            border: 1px solid var(--line-color); 
+            margin-bottom: 5px; 
+            font-family: var(--font-code);
+            font-size: 11px; 
+            background: var(--bg-panel); 
+            backdrop-filter: blur(var(--blur-val)); 
+            border-radius: 6px; 
+        }
+        .ctrl-group { display: flex; align-items: center; gap: 10px; height: 100%; }
+        
+        .sep { color: var(--text-sub); font-weight: 400; opacity: 0.6; } 
+        
+        .btn-reset, .mode-switch, .color-input-wrapper, .bgm-toggle { 
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--text-sub);
+            transition: 0.2s; font-weight: 600; height: 100%; line-height: 1;
+        }
+        .btn-reset:hover, .mode-switch:hover, .color-input-wrapper:hover, .bgm-toggle:hover { color: var(--sys-accent); }
+        
+        .btn-reset span, .color-input-wrapper span { line-height: 1; }
+        
+        .bgm-toggle.playing { color: var(--sys-accent); text-shadow: 0 0 5px var(--sys-accent-alpha);
+        animation: pulseText 1.5s infinite; }
+        @keyframes pulseText { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        
+        .mode-switch { display: inline-flex; width: 20px; align-items: center; justify-content: center; } 
+        .mode-switch::after { content: '☾'; font-size: 14px; line-height: 1; } 
+        [data-theme="dark"] .mode-switch::after { content: '☀'; font-size: 14px; line-height: 1; }
+        
+        input[type="color"] { border: none; width: 14px; height: 14px; border-radius: 50%; cursor: pointer; padding: 0; background: none; flex-shrink: 0;} 
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: 1px solid var(--line-color); border-radius: 50%; }
+        
+        .char-stage { 
+            flex: none;
+            width: 100%; 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start;
+            margin-top: 5px; 
+            margin-bottom: 5px;
+            cursor: default;
+            overflow: visible; 
+            height: auto;
+            min-height: 0;
+        }
+
+        .gfx-wrapper.dev .char-stage {
+            flex: none;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
+            display: block;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+        
+        .img-wrapper {
+            position: relative;
+            display: inline-block;
+            line-height: 0;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .gfx-wrapper.dev .img-wrapper { 
+            cursor: crosshair;
+            max-height: none !important;
+            height: auto !important;
+        }
+        
+        .char-img { 
+            display: block;
+            pointer-events: none; 
+            border-radius: 8px;
+            width: auto; 
+            height: auto;
+            max-width: 100%;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .gfx-wrapper.dev .char-img {
+            max-height: none !important;
+            width: 100%;
+            height: auto !important;
+        }
+
+        #triggerLayer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        .hit-box { position: absolute; z-index: 10; background: transparent; cursor: pointer; }
+        .hit-box:hover { background: transparent; border: none; }
+        
+        .gfx-wrapper.dev .hit-box { 
+            border: 1px solid var(--sys-accent); 
+            background: var(--sys-accent-alpha); 
+            cursor: move;
+        }
+        
+        .gfx-wrapper.dev .hit-box::after { content: attr(data-title); position: absolute; top: -22px; left: 0; font-family: var(--font-code); font-size: 9px; color: #000; background: var(--sys-accent); padding: 4px 7px; border-radius: 2px; z-index: 25; pointer-events: none; font-weight: bold; line-height: 1; white-space: nowrap; text-shadow: none; height: 17px; display: flex; align-items: center; box-sizing: border-box;
+        }
+        
+        .del-btn { 
+            position: absolute; 
+            top: -10px; 
+            right: -10px; 
+            width: 20px; 
+            height: 20px;
+            background: #ff4040; 
+            color: white;
+            border-radius: 50%; 
+            cursor: pointer; 
+            z-index: 30;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            font-family: sans-serif;
+            font-size: 12px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .gfx-wrapper.dev .del-btn { display: flex; }
+        
+        .edit-btn { position: absolute;
+            bottom: -28px; right: 0; width: auto; min-width: 38px; height: 17px; background: var(--text-main); color: var(--bg-panel); border-radius: 2px; 
+            padding: 0 7px; text-align: center; line-height: 17px; font-size: 9px; font-family: var(--font-code);
+            cursor: pointer; display: none; z-index: 30; font-weight: 600; box-sizing: border-box; }
+        .gfx-wrapper.dev .edit-btn { display: block; }
+
+        .resize-handle {
+            position: absolute; width: 8px; height: 8px; 
+            background: var(--sys-accent); 
+            border: 1px solid #fff; 
+            z-index: 31; display: none;
+        }
+        .gfx-wrapper.dev .resize-handle { display: block; }
+        .handle-tl { top: -4px; left: -4px; cursor: nw-resize; }
+        .handle-bl { bottom: -4px; left: -4px; cursor: sw-resize; }
+        .handle-br { bottom: -4px; right: -4px; cursor: se-resize; }
+        
+        .selection-marquee { position: absolute; border: 1px dashed var(--sys-accent); background: var(--sys-accent-alpha); z-index: 20;
+        pointer-events: none; display: none; }
+        .click-ripple { position: absolute; transform: translate(-50%, -50%); pointer-events: none; z-index: 5;
+        width: 10px; height: 10px;
+        border: 1px solid var(--sys-accent); border-radius: 50%; opacity: 0.8; animation: rippleExpand 0.5s ease-out forwards;
+        }
+        @keyframes rippleExpand { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; border-width: 0; } }
+        
+        .draggable-hud { 
+            position: absolute;
+            top: 50%; left: 50%; 
+            width: clamp(290px, 40%, 480px); 
+            background: var(--bg-panel); color: var(--text-main); backdrop-filter: blur(var(--blur-val)); border: 1px solid var(--line-color);
+            border-left: 3px solid var(--sys-accent); box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 100; opacity: 0; visibility: hidden; transition: opacity 0.2s;
+            border-radius: 10px 0px 10px 10px; transform: translate(-50%, -50%); touch-action: none; user-select: none; 
+        }
+        .draggable-hud.active { opacity: 1; visibility: visible; }
+        .draggable-hud::after { content: ''; position: absolute; top: -1px; right: -1px; width: 10px; height: 10px;
+        border-top: 2px solid var(--sys-accent); border-right: 2px solid var(--sys-accent); pointer-events: none; }
+        .hud-header { padding: 8px 12px;
+        border-bottom: 1px solid var(--line-color); display: flex; justify-content: space-between; align-items: center; cursor: move; background: rgba(0, 0, 0, 0.03);
+        }
+        .hud-title { font-family: var(--font-code); font-size: 11px; font-weight: bold; color: var(--sys-accent); }
+        .hud-close { cursor: pointer; font-size: 12px; font-family: var(--font-code); color: var(--text-sub); }
+        .hud-close:hover { color: var(--text-main); }
+        .hud-body { padding: 15px; font-size: 13px; color: var(--text-main);
+        min-height: 50px; white-space: pre-wrap; line-height: 1.6; word-break: keep-all; }
+        
+        .typing-cursor { display: inline-block; width: 8px; color: var(--sys-accent); font-weight: bold; animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .sys-nav { display: flex;
+        margin-top: 10px; position: relative; z-index: 5; background: var(--bg-panel); backdrop-filter: blur(var(--blur-val)); border-radius: 8px 8px 0 0; border: 1px solid var(--line-color);
+        border-bottom: none; flex-shrink: 0; }
+        .nav-item { flex: 1; text-align: center; padding: 14px 0; font-family: var(--font-code);
+        font-size: 11px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; transition: 0.3s; border-right: 1px solid var(--line-color);
+        }
+        .nav-item:last-child { border-right: none; }
+        .nav-item:hover { color: var(--text-main); }
+        .nav-item.active { color: var(--sys-accent); border-bottom-color: var(--sys-accent); background: linear-gradient(to top, var(--sys-accent-alpha), transparent 80%); font-weight: bold; }
+        
+        .data-viewport { 
+            flex-shrink: 0;
+            background: var(--bg-panel); 
+            backdrop-filter: blur(var(--blur-val)); 
+            padding: 20px 25px; 
+            border-radius: 0 0 8px 8px; 
+            border: 1px solid var(--line-color); 
+            border-top: none; 
+            overflow-y: auto;
+            min-height: 180px; 
+            max-height: 35vh; 
+        }
+        .page-view { display: none; width: 100%; animation: slideUp 0.4s ease; }
+        #view-status.active { display: flex; flex-direction: column; justify-content: center; }
+        #view-archive.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .coc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 25px; width: 100%; }
+        .coc-row { display: flex; align-items: center; font-family: var(--font-code); font-size: 12px; color: var(--text-sub); padding: 5px 8px;
+        border-radius: 4px; transition: 0.3s; }
+        .coc-row.glow { background: linear-gradient(90deg, var(--sys-accent-alpha), transparent); }
+        .coc-row.glow .coc-label, .coc-row.glow .coc-val { color: var(--sys-accent); font-weight: bold; text-shadow: 0 0 8px var(--sys-accent); }
+        .coc-row.glow .prog-fill { background: var(--sys-accent) !important; box-shadow: 0 0 12px var(--sys-accent); }
+        .coc-label { width: 40px; font-weight: 600; letter-spacing: 0.5px; }
+        .prog-track { flex: 1; height: 6px; background: rgba(125,125,125,0.15); margin-left: 10px; border-radius: 3px; overflow: hidden; }
+        .prog-fill { height: 100%; background: var(--sys-accent); width: 0%; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); border-radius: 3px; }
+        .coc-val { width: 35px; text-align: right; font-weight: 500; }
+        .archive-box { font-size: 13px; color: var(--text-main); line-height: 1.7; display: flex; flex-direction: column; }
+        .archive-meta-list { font-family: var(--font-main); font-size: 12px; color: var(--text-sub); margin-bottom: 12px; line-height: 1.6; flex-shrink: 0; }
+        .archive-meta-list .meta-key { color: var(--sys-accent); font-weight: bold; font-family: var(--font-code); }
+        .archive-meta-list .meta-val { color: var(--text-main); font-weight: 400; font-family: var(--font-main); }
+        .archive-divider { width: 100%; height: 1px; background-image: linear-gradient(to right, var(--line-color) 50%, transparent 50%); background-size: 6px 1px;
+        background-repeat: repeat-x; margin-bottom: 15px; flex-shrink: 0; }
+        .archive-text-scroll { overflow-y: auto; user-select: text; padding-right: 5px; scrollbar-width: thin;
+        scrollbar-color: var(--sys-accent) transparent; white-space: pre-wrap; line-height: 1.8; word-break: keep-all; }
+        .archive-text-scroll::-webkit-scrollbar { width: 4px; }
+        .archive-text-scroll::-webkit-scrollbar-track { background: transparent; }
+        .archive-text-scroll::-webkit-scrollbar-thumb { background-color: var(--line-color); border-radius: 10px; }
+        .archive-text-scroll::-webkit-scrollbar-thumb:hover { background-color: var(--sys-accent); }
+        
+        .dev-panel { display: none; width: 100%; padding: 15px; background: #f4f4f4; border: 1px solid #ccc; font-family: var(--font-main); font-size: 12px; margin-top: 10px; color: #333; }
+        .gfx-wrapper.dev + .dev-panel { display: block; }
+        .dev-section { margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+        .dev-section h3 { margin: 0 0 10px 0; font-size: 14px; color: #555; font-weight: bold; }
+        .input-row { display: flex; align-items: center; margin-bottom: 5px; }
+        .input-label { width: 70px; font-weight: bold; }
+        .input-field { flex: 1; height: 32px; padding: 4px 8px; border: 1px solid #ddd; font-family: var(--font-main) !important; box-sizing: border-box; }
+        .input-area { width: 100%; height: 80px; padding: 4px; border: 1px solid #ddd; resize: vertical; font-family: var(--font-main) !important; }
+        .dev-btn { background: #222; color: white; padding: 8px 12px; border: none; cursor: pointer; margin-top: 5px; width: 100%; font-weight: bold; font-family: var(--font-main); }
+        .dev-btn:hover { background: #444; }
+        .code-output { width: 100%; height: 200px; margin-top: 10px; background: #fff; border: 1px solid #999; padding: 10px; white-space: pre; font-family: var(--font-code) !important; color: #333; resize: vertical; font-size: 11px; }
+        
+        .guide-box { background: #eef; padding: 10px; border-radius: 5px; margin-bottom: 10px; line-height: 1.5; color: #446; font-size: 11px;}
+        .image-analysis { margin-top: 10px; margin-bottom: 10px; display: none; }
+        .analysis-box { background: #e8f5e9; padding: 8px 10px; border-radius: 4px; font-size: 11px; color: #2e7d32; border-left: 3px solid #4caf50; }
+        .size-control { margin-top: 10px; padding: 10px; background: #f9f9f9; border-radius: 4px; border: 1px solid #ddd; }
+        .checkbox-wrapper { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; cursor: pointer; }
+        .checkbox-wrapper input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+        .checkbox-wrapper span { font-size: 12px; font-weight: bold; color: #333; }
+        .manual-slider { margin-top: 10px; transition: opacity 0.3s; }
+        .manual-slider label { display: block; font-size: 11px; color: #666; margin-bottom: 5px; }
+        .manual-slider input[type="range"] { width: calc(100% - 50px); vertical-align: middle; }
+        .manual-slider span { display: inline-block; width: 45px; text-align: right; font-weight: bold; color: #333; }
+        .scale-preview { margin-top: 10px; padding: 6px 10px; background: #fff; border-radius: 3px; border: 1px solid #ddd; font-size: 11px; }
+        .scale-preview strong { color: #2e7d32; font-weight: bold; }
+
+        #bgmPlayer { display: none; }
+
+        .editor-modal-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 200; display: none; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.1); backdrop-filter: blur(2px);
+        }
+        .editor-modal-overlay.active { display: flex; }
+        .editor-box {
+            width: clamp(290px, 40%, 480px);
+            background: var(--bg-panel);
+            color: var(--text-main);
+            backdrop-filter: blur(var(--blur-val));
+            border: 1px solid var(--line-color);
+            border-left: 3px solid var(--sys-accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            z-index: 200;
+            border-radius: 10px 0px 10px 10px;
+            display: flex; 
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+        .editor-box::after { 
+            content: ''; 
+            position: absolute; 
+            top: -1px; 
+            right: -1px; 
+            width: 10px; 
+            height: 10px;
+            border-top: 2px solid var(--sys-accent); 
+            border-right: 2px solid var(--sys-accent); 
+            pointer-events: none; 
+        }
+        .editor-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--line-color);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .editor-title { 
+            font-family: var(--font-code); 
+            font-size: 11px; 
+            font-weight: bold; 
+            color: var(--sys-accent); 
+        }
+        .editor-close {
+            cursor: pointer; 
+            font-size: 12px; 
+            font-family: var(--font-code); 
+            color: var(--text-sub);
+        }
+        .editor-close:hover { color: var(--text-main); }
+        .editor-body { 
+            padding: 15px; 
+            font-size: 13px; 
+            color: var(--text-main);
+        }
+        .editor-row { margin-bottom: 8px; }
+        .editor-row:not(:first-child) { margin-top: 20px; }
+        .editor-label { 
+            display: block; 
+            font-weight: 500; 
+            margin-bottom: 6px; 
+            font-family: var(--font-main); 
+            color: var(--text-main); 
+            font-size: 11px; 
+            text-align: left; 
+        }
+        .editor-input { 
+            width: 100%; 
+            border: 1px solid var(--line-color); 
+            background: rgba(255,255,255,0.5); 
+            padding: 8px; 
+            font-family: var(--font-main); 
+            color: var(--text-main); 
+            border-radius: 2px; 
+            line-height: 1.5; 
+            font-size: 13px;
+        }
+        .editor-input:focus { outline: none; border-color: var(--sys-accent); }
+        .editor-footer { 
+            padding: 8px 15px; 
+            border-top: 1px solid var(--line-color); 
+            display: flex; 
+            justify-content: flex-end; 
+        }
+        .btn-save {
+            padding: 10px 18px; 
+            border-radius: 3px; 
+            font-size: 11px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            border: none; 
+            font-family: var(--font-code); 
+            letter-spacing: 0.5px;
+            background: var(--sys-accent); 
+            color: #000;
+            transition: 0.2s;
+        }
+        .btn-save:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .cyber-dropdown { position: relative; font-family: var(--font-code); width: 100%; font-size: 12px;}
+        .dropdown-trigger {
+            background: rgba(255,255,255,0.5); border: 1px solid var(--line-color);
+            padding: 8px; min-height: 36px; display: flex; flex-wrap: wrap; gap: 5px; cursor: pointer; align-items: flex-start; align-items: center;
+            border-radius: 2px;
+        }
+        .dropdown-trigger:hover { border-color: var(--sys-accent); }
+        .dd-tag {
+            background: var(--sys-accent-alpha); color: var(--text-main); border: 1px solid var(--sys-accent);
+            padding: 1px 5px; font-size: 10px; border-radius: 2px; font-weight: bold; line-height: 1; display: inline-flex; align-items: center;
+        }
+        .dd-placeholder { color: var(--text-sub); opacity: 0.7; }
+        .dropdown-list {
+            position: absolute; top: 100%; left: 0; width: 100%;
+            background: var(--bg-panel); border: 1px solid var(--sys-accent);
+            max-height: 150px; overflow-y: auto; z-index: 250; display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 2px;
+        }
+        .dropdown-list.show { display: block; }
+        .dropdown-item {
+            padding: 6px 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            border-bottom: 1px solid var(--line-color); transition: 0.2s;
+        }
+        .dropdown-item:hover { background: var(--sys-accent-alpha); }
+        .dropdown-item input { accent-color: var(--sys-accent); cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .ctrl-bar { padding: 0 12px; font-size: 12px; }
+            .coc-grid { gap: 8px 15px; }
+            .hud-body { font-size: 13px; line-height: 1.6; }
+            .archive-box { font-size: 13px; }
+            .nav-item { padding: 16px 0; font-size: 12px; }
+            .draggable-hud { width: 260px; max-width: 80vw;}
+        }
+
+        .input-area::-webkit-scrollbar,
+        .code-output::-webkit-scrollbar { width: 6px; }
+        .input-area::-webkit-scrollbar-track,
+        .code-output::-webkit-scrollbar-track { background: transparent; }
+        .input-area::-webkit-scrollbar-thumb,
+        .code-output::-webkit-scrollbar-thumb { background-color: var(--line-color); border-radius: 10px; }
+        .input-area::-webkit-scrollbar-thumb:hover,
+        .code-output::-webkit-scrollbar-thumb:hover { background-color: var(--sys-accent); }
+    </style>
+</head>
+<body>
+    <div class="gfx-wrapper" id="gfxSystem" data-theme="light">
+        <div class="ctrl-bar">
+            <div class="btn-reset" onclick="resetHudPos()" title="팝업 위치 초기화"><span><i>⌖</i> RESET POS</span></div>
+            <div class="ctrl-group">
+                <div class="bgm-toggle" id="bgmControl" title="BGM 재생/정지">♪ BGM</div>
+                <span class="sep">//</span>
+                <div class="color-input-wrapper" title="테마 컬러 변경">
+                    <span>COLOR</span>
+                    <input type="color" id="accentPicker" value="#17F4E2">
+                </div>
+                <div class="btn-reset" onclick="resetColor()" title="제작자 지정 색상으로 초기화" style="margin-left: 6px; font-size: 14px; opacity: 0.7; cursor:pointer;"><span>↺</span></div>
+                <span class="sep">//</span>
+                <div class="mode-switch" id="themeToggle"></div>
+            </div>
+        </div>
+        
+        <div id="bgmPlayer"></div>
+
+        <div class="char-stage" id="stageArea">
+            <div class="img-wrapper" id="imgWrapper">
+                <img src="" class="char-img" id="charImg">
+                <div id="triggerLayer"></div>
+                <div id="selectionBox" class="selection-marquee"></div>
+                
+                <div class="editor-modal-overlay" id="editorModal">
+                    <div class="editor-box">
+                        <div class="editor-header">
+                            <span class="editor-title">/// EDIT_NODE</span>
+                            <span class="editor-close" onclick="closeEditor()">[x]</span>
+                        </div>
+                        <div class="editor-body">
+                            <div class="editor-row">
+                                <span class="editor-label">TITLE</span>
+                                <input type="text" class="editor-input" id="ed_title" placeholder="영역 제목 (예시: HEAD)">
+                            </div>
+                            <div class="editor-row">
+                                <span class="editor-label">LINK STAT (CoC 7th)</span>
+                                <div class="cyber-dropdown">
+                                    <div class="dropdown-trigger" id="ddTrigger">
+                                        <span class="dd-placeholder">선택 안함</span>
+                                    </div>
+                                    <div class="dropdown-list" id="ddList"></div>
+                                </div>
+                            </div>
+                            <div class="editor-row">
+                                <span class="editor-label">SCRIPT</span>
+                                <textarea class="editor-input" id="ed_desc" rows="6" style="resize:vertical;" placeholder="클릭 시 출력될 텍스트를 입력해주세요.&#10;대사 구분은 ||로 합니다.&#10;예시: 대사1||대사2||대사3"></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-footer">
+                            <button class="btn-save" id="btnSaveSpot">SAVE DATA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="draggable-hud" id="hudWindow">
+                <div class="hud-header" id="hudHandle">
+                    <span class="hud-title" id="hudTitle">SYSTEM</span>
+                    <span class="hud-close" onclick="closeHud()">[x]</span>
+                </div>
+                <div class="hud-body" id="hudText"></div>
+            </div>
+        </div>
+
+        <div class="sys-nav">
+            <div class="nav-item active" data-target="status">/// STATUS_MONITOR</div>
+            <div class="nav-item" data-target="archive">/// ARCHIVE_DATA</div>
+        </div>
+
+        <div class="data-viewport">
+            <div class="page-view active" id="view-status">
+                <div class="coc-grid" id="cocList"></div>
+            </div>
+            <div class="page-view" id="view-archive">
+                <div class="archive-box">
+                    <div class="archive-meta-list" id="arc-meta"></div>
+                    <div class="archive-divider"></div>
+                    <div class="archive-text-scroll" id="arc-lore" style="white-space: pre-wrap;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-panel" id="devToolPanel">
+        <div class="dev-section">
+            <h3>☞ 개발자 패널 관리</h3>
+            <div class="guide-box">
+                <b>[편집 모드 사용법]</b><br>
+                1. <b>핫스팟 추가:</b> 이미지를 드래그하여 <b>영역을 그리면</b> 편집창이 뜹니다.<br>
+                2. <b>영역 이동/수정:</b> 만들어진 영역을 <b>드래그</b>해서 옮길 수 있습니다.<br>
+                3. <b>크기 조절:</b> 영역의 <b>세 모서리(좌상, 좌하, 우하)</b>에 있는 점을 당겨 크기를 조절하세요.<br>
+                4. <b>정보 수정:</b> 영역 하단의 [EDIT] 버튼을 누르면 내용을 수정할 수 있습니다.<br>
+                5. <b>완료:</b> 수정을 다 마쳤다면 맨 아래 <b>[코드 내보내기]</b>를 누르세요.
+            </div>
+        </div>
+
+        <div class="dev-section">
+            <h3>☞ 이미지 URL & 크기 설정</h3>
+            <div class="input-row">
+                <span class="input-label">IMAGE</span>
+                <input type="text" id="editImageUrl" class="input-field" placeholder="이미지 URL 입력 (.png, .jpg)">
+            </div>
+            
+            <div class="image-analysis" id="imageAnalysis">
+                <div class="analysis-box" id="analysisResult">이미지 분석 중...</div>
+            </div>
+            
+            <div class="size-control">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="autoScaleCheck" checked>
+                    <span>자동 크기 조정 (권장)</span>
+                </label>
+                
+                <div class="manual-slider" id="manualSlider" style="opacity:0.5;">
+                    <label>수동 조정:</label>
+                    <input type="range" id="scaleSlider" min="30" max="100" value="100" step="1">
+                    <span id="scaleValue">100%</span>
+                </div>
+                
+                <div class="scale-preview">
+                    <span>현재 적용: </span>
+                    <strong id="currentScale">100% (자동)</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="dev-section">
+            <h3>☞ 기본 정보 & BGM</h3>
+            <div class="input-row"><span class="input-label">ID</span><input type="text" id="editID" class="input-field"></div>
+            <div class="input-row"><span class="input-label">POSITION</span><input type="text" id="editPosition" class="input-field"></div>
+            <div class="input-row"><span class="input-label">QUOTE</span><input type="text" id="editQuote" class="input-field"></div>
+            <div class="input-row"><span class="input-label">BGM</span><input type="text" id="editBgm" class="input-field" placeholder="유튜브 링크 입력"></div>
+            
+            <div class="input-row" style="position: relative; margin-top: 5px; margin-bottom: 5px;">
+                <span class="input-label">THEME</span>
+                <input type="color" id="editThemeColor" style="position: absolute; top:0; left:70px; width: calc(100% - 70px); height: 32px; opacity: 0; cursor: pointer; z-index: 2;">
+                <div id="themePreview" style="flex: 1; height: 32px; background: #17F4E2; border: 1px solid #ddd; border-radius: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333; text-shadow: 0 0 2px rgba(255,255,255,0.7);">#17F4E2</div>
+            </div>
+
+            <div style="margin-top:5px;"><b>Lore (설명글)</b></div>
+            <textarea id="editLore" class="input-area" placeholder="캐릭터 프로필 등 긴 내용을 입력하세요."></textarea>
+        </div>
+        
+        <div class="dev-section">
+            <h3>☞ 스탯 (STATS) 수정</h3>
+            <div id="statEditorContainer"></div>
+        </div>
+        
+        <button class="dev-btn" id="btn-export">코드 내보내기 (EXPORT ALL)</button>
+        <button class="dev-btn" id="btn-copy" style="background: #444; margin-top:5px;">코드 복사하기 (COPY CODE)</button>
+        
+        <textarea class="code-output" id="codeOutput" readonly placeholder="버튼을 누르면 완성 코드가 나옵니다."></textarea>
+    </div>
+
+    <!-- 복사한 코드를 이 밑의 <textarea id= 부터 </textarea> 까지 통째로 덮어쓰면 됩니다! -->
+    <textarea id="gfx-raw-data" style="display:none;">
+{
+    "themeColor": "#17F4E2",
+    "imageUrl": "https://placehold.co/400x600/222/17F4E2?text=NO+IMAGE",
+    "meta": {
+        "ID": "이름을 적어주세요.",
+        "POSITION": "직업 등을 적어주세요.",
+        "QUOTE": "한마디를 적어주세요."
+    },
+    "lore": "",
+    "bgm": "",
+    "stats": [
+        {"label":"STR","val":50},
+        {"label":"DEX","val":50},
+        {"label":"INT","val":50},
+        {"label":"CON","val":50},
+        {"label":"APP","val":50},
+        {"label":"POW","val":50},
+        {"label":"SIZ","val":50},
+        {"label":"EDU","val":50}
+    ],
+    "hotspots": [
+        {"title":"HEAD","desc":"샘플 영역입니다.","top":10,"left":45,"width":10,"height":10,"link":["INT"]}
+    ],
+    "imageScale": null,
+    "autoScale": true
+}
+    </textarea>
+
+    <script>
+        // 편집 모드 스위치: true로 바꾸면 편집 모드가 켜집니다.
+        // false로 바꾸면 기본 모드가 켜집니다.
+        var GFX_EDIT_MODE = true;
+
+        const cocStats = ["STR", "CON", "SIZ", "DEX", "APP", "INT", "POW", "EDU"];
+
+        (() => {
+            var USER_CONFIG;
+            var dataArea = document.getElementById('gfx-raw-data');
+
+            if (dataArea) {
+                try {
+                    var rawText = dataArea.value
+                        .replace(/&quot;/g, '"')
+                        .replace(/&lt;/g, '<')
+                        .replace(/&gt;/g, '>');
+                    USER_CONFIG = JSON.parse(rawText);
+                } catch (e) {
+                    console.error(e);
+                    alert("데이터 로드 중 오류 발생!\n" + e.message);
+                    return;
+                }
+            } else {
+                alert("설정 데이터를 찾을 수 없습니다.");
+                return;
+            }
+
+            USER_CONFIG.editMode = GFX_EDIT_MODE;
+
+            const root = document.getElementById('gfxSystem');
+            const stage = document.getElementById('stageArea');
+            const imgWrapper = document.getElementById('imgWrapper'); 
+            const triggerLayer = document.getElementById('triggerLayer');
+            const selectionBox = document.getElementById('selectionBox');
+            const hudWindow = document.getElementById('hudWindow');
+            const hudHeader = document.getElementById('hudHandle');
+            const hudTitle = document.getElementById('hudTitle');
+            const hudText = document.getElementById('hudText');
+            const cocList = document.getElementById('cocList');
+            const arcMeta = document.getElementById('arc-meta');
+            const arcLore = document.getElementById('arc-lore');
+            const charImg = document.getElementById('charImg');
+            const outputBox = document.getElementById('codeOutput');
+            const colorInput = document.getElementById('accentPicker');
+            const themeBtn = document.getElementById('themeToggle');
+            const bgmBtn = document.getElementById('bgmControl');
+            const bgmPlayer = document.getElementById('bgmPlayer');
+
+            const editorModal = document.getElementById('editorModal');
+            const ddTrigger = document.getElementById('ddTrigger');
+            const ddList = document.getElementById('ddList');
+            const btnSaveSpot = document.getElementById('btnSaveSpot');
+            let editingIndex = -1; 
+            let tempSpotData = null; 
+
+            if(USER_CONFIG.editMode) {
+                root.classList.add('dev');
+                initDevPanel();
+                initDropdown(); 
+            }
+            charImg.src = USER_CONFIG.imageUrl;
+
+            function applyImageScale(scale) {
+    if(!USER_CONFIG.editMode) {
+        const naturalWidth = charImg.naturalWidth;
+        if(naturalWidth) {
+            charImg.style.width = (naturalWidth * scale) + 'px';
+            charImg.style.height = 'auto';
+        }
+    }
+}
+
+            function calculateOptimalScale() {
+                const container = root.parentElement || root;
+                const containerWidth = container.offsetWidth;
+                const containerHeight = window.innerHeight;
+                
+                const imgWidth = charImg.naturalWidth;
+                const imgHeight = charImg.naturalHeight;
+                if(!imgWidth || !imgHeight) return 1;
+                
+                const widthScale = (containerWidth * 0.95) / imgWidth;
+                const heightScale = (containerHeight * 0.85) / imgHeight;
+                const optimalScale = Math.min(widthScale, heightScale, 1);
+                
+                return Math.max(0.3, optimalScale);
+            }
+
+            function handleImageLoad() {
+    if(USER_CONFIG.autoScale !== false) {
+        const optimal = calculateOptimalScale();
+        applyImageScale(optimal);
+        
+        if(USER_CONFIG.editMode) {
+            const analysisBox = document.getElementById('imageAnalysis');
+            const analysisResult = document.getElementById('analysisResult');
+            const scaleSlider = document.getElementById('scaleSlider');
+            const scaleValue = document.getElementById('scaleValue');
+            const currentScale = document.getElementById('currentScale');
+            if(analysisBox && analysisResult) {
+                analysisBox.style.display = 'block';
+                const w = charImg.naturalWidth;
+                const h = charImg.naturalHeight;
+                const percent = Math.round(optimal * 100);
+                analysisResult.innerHTML = `원본: ${w} x ${h}px → 권장: ${percent}% (자동 계산)`;
+                if(scaleSlider && scaleValue && currentScale) {
+                    scaleSlider.value = percent;
+                    scaleValue.textContent = percent + '%';
+                    currentScale.textContent = percent + '% (자동)';
+                }
+            }
+        }
+    } else if(USER_CONFIG.imageScale) {
+        applyImageScale(USER_CONFIG.imageScale);
+    }
+}
+
+charImg.onload = handleImageLoad;
+
+if(charImg.complete && charImg.naturalWidth > 0) {
+    handleImageLoad();
+}
+
+            let isPlaying = false;
+            function getYoutubeId(url) {
+                if(!url) return null;
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+                const match = url.match(regExp);
+                return (match && match[2].length === 11) ? match[2] : null;
+            }
+
+            function toggleBgm() {
+                if(!USER_CONFIG.bgm) {
+                    alert('BGM 링크가 설정되지 않았습니다.');
+                    return;
+                }
+                const vidId = getYoutubeId(USER_CONFIG.bgm);
+                if(!vidId) {
+                    alert('올바르지 않은 유튜브 링크입니다.');
+                    return;
+                }
+
+                if(isPlaying) {
+    const iframe = bgmPlayer.querySelector('iframe');
+    if(iframe && iframe.contentWindow) {
+        try {
+            iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+        } catch(e) {
+            console.warn('BGM 정지 실패:', e);
+        }
+    }
+    setTimeout(() => {
+        bgmPlayer.innerHTML = '';
+    }, 100);
+    bgmBtn.classList.remove('playing');
+    isPlaying = false;
+} else {
+    bgmPlayer.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${vidId}?autoplay=1&loop=1&playlist=${vidId}&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    bgmBtn.classList.add('playing');
+    isPlaying = true;
+}
+            }
+            bgmBtn.onclick = toggleBgm;
+
+            function renderArchive() {
+                let metaHtml = '';
+                for (const [key, value] of Object.entries(USER_CONFIG.meta)) {
+                    metaHtml += `<div><span class="meta-key">${key}</span>: <span class="meta-val">${value}</span></div>`;
+                }
+                arcMeta.innerHTML = metaHtml;
+                arcLore.innerText = USER_CONFIG.lore;
+            }
+
+            const statRows = {};
+            function renderStats() {
+                cocList.innerHTML = '';
+                USER_CONFIG.stats.forEach(s => {
+                    const el = document.createElement('div');
+                    el.className = 'coc-row';
+                    el.innerHTML = `<div class="coc-label">${s.label}</div><div class="prog-track"><div class="prog-fill" style="width:0%"></div></div><div class="coc-val">${s.val}</div>`;
+                    cocList.appendChild(el);
+                    statRows[s.label] = el;
+                    setTimeout(() => el.querySelector('.prog-fill').style.width = s.val + "%", 200);
+                });
+            }
+            renderStats();
+
+            function drawHotspots() {
+                triggerLayer.innerHTML = '';
+                USER_CONFIG.hotspots.forEach((d, index) => {
+                    const hit = document.createElement('div');
+                    hit.className = 'hit-box';
+                    hit.style.top = d.top + "%";
+                    hit.style.left = d.left + "%";
+                    hit.style.width = d.width + "%";
+                    hit.style.height = d.height + "%";
+                    hit.setAttribute('data-title', d.title);
+
+                    if(USER_CONFIG.editMode) {
+                        makeDraggable(hit, index);
+
+                        const delBtn = document.createElement('div');
+                        delBtn.className = 'del-btn';
+                        delBtn.innerText = '✕';
+                        delBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            if(confirm(`'${d.title}' 영역을 삭제할까요?`)) {
+                                USER_CONFIG.hotspots.splice(index, 1);
+                                drawHotspots();
+                            }
+                        };
+                        hit.appendChild(delBtn);
+
+                        const editBtn = document.createElement('div');
+                        editBtn.className = 'edit-btn';
+                        editBtn.innerText = 'EDIT';
+                        editBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            openEditor(index);
+                        };
+                        hit.appendChild(editBtn);
+
+                        const corners = ['tl', 'bl', 'br'];
+                        corners.forEach(c => {
+                            const handle = document.createElement('div');
+                            handle.className = `resize-handle handle-${c}`;
+                            handle.onmousedown = (e) => initResize(e, index, c);
+                            hit.appendChild(handle);
+                        });
+                    }
+
+                    hit.onclick = (e) => {
+    if(USER_CONFIG.editMode) return;
+    e.stopPropagation();
+    
+    const rect = imgWrapper.getBoundingClientRect();
+    const imgRect = charImg.getBoundingClientRect();
+    const offsetX = (imgRect.left - rect.left);
+    const offsetY = (imgRect.top - rect.top);
+    const imgHeight = imgRect.height || 1;
+    const imgWidth = imgRect.width || 1;
+    const ry = ((e.clientY - rect.top - offsetY) / imgHeight * 100);
+    const rx = ((e.clientX - rect.left - offsetX) / imgWidth * 100);
+    triggerRipple(ry, rx);
+    openHud(d);
+};
+                    triggerLayer.appendChild(hit);
+                });
+            }
+            drawHotspots();
+
+            function makeDraggable(el, index) {
+                let startX, startY, startTop, startLeft;
+                
+                el.onmousedown = (e) => {
+                    if(e.target.classList.contains('resize-handle') || 
+                       e.target.classList.contains('del-btn') || 
+                       e.target.classList.contains('edit-btn')) return;
+                    
+                    e.stopPropagation();
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    startTop = parseFloat(el.style.top);
+                    startLeft = parseFloat(el.style.left);
+                    
+                    const onMove = (mv) => {
+                        const wrapperRect = imgWrapper.getBoundingClientRect();
+                        const dxPx = mv.clientX - startX;
+                        const dyPx = mv.clientY - startY;
+                        
+                        const dxPct = (dxPx / wrapperRect.width) * 100;
+                        const dyPct = (dyPx / wrapperRect.height) * 100;
+
+                        el.style.top = (startTop + dyPct) + "%";
+                        el.style.left = (startLeft + dxPct) + "%";
+                    };
+
+                    const onUp = () => {
+                        document.removeEventListener('mousemove', onMove);
+                        document.removeEventListener('mouseup', onUp);
+                        const d = USER_CONFIG.hotspots[index];
+                        d.top = parseFloat(parseFloat(el.style.top).toFixed(1));
+                        d.left = parseFloat(parseFloat(el.style.left).toFixed(1));
+                    };
+                    
+                    document.addEventListener('mousemove', onMove);
+                    document.addEventListener('mouseup', onUp);
+                };
+            }
+
+            function initResize(e, index, type) {
+                e.stopPropagation();
+                e.preventDefault(); 
+                const d = USER_CONFIG.hotspots[index];
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const startTop = d.top;
+                const startLeft = d.left;
+                const startW = d.width;
+                const startH = d.height;
+                const wrapperRect = imgWrapper.getBoundingClientRect();
+
+                const onMove = (mv) => {
+                    const dxPx = mv.clientX - startX;
+                    const dyPx = mv.clientY - startY;
+                    const dx = (dxPx / wrapperRect.width) * 100;
+                    const dy = (dyPx / wrapperRect.height) * 100;
+
+                    if(type === 'br') {
+                        d.width = Math.max(1, startW + dx);
+                        d.height = Math.max(1, startH + dy);
+                    } else if(type === 'bl') {
+                        d.left = startLeft + dx;
+                        d.width = Math.max(1, startW - dx);
+                        d.height = Math.max(1, startH + dy);
+                    } else if(type === 'tl') {
+                        d.top = startTop + dy;
+                        d.left = startLeft + dx;
+                        d.width = Math.max(1, startW - dx);
+                        d.height = Math.max(1, startH - dy);
+                    }
+                    drawHotspots();
+                };
+
+                const onUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                    d.top = parseFloat(d.top.toFixed(1));
+                    d.left = parseFloat(d.left.toFixed(1));
+                    d.width = parseFloat(d.width.toFixed(1));
+                    d.height = parseFloat(d.height.toFixed(1));
+                    drawHotspots();
+                };
+
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            }
+
+            if(USER_CONFIG.editMode) {
+                let isSelecting = false;
+                let startX, startY;
+
+                imgWrapper.addEventListener('mousedown', (e) => {
+    if(e.target.closest('.draggable-hud') || 
+       e.target.closest('.hit-box') || 
+       e.target.closest('.editor-modal-overlay')) return;
+    
+    isSelecting = true;
+    const wrapperRect = imgWrapper.getBoundingClientRect();
+    const imgRect = charImg.getBoundingClientRect();
+    const offsetX = (imgRect.left - wrapperRect.left);
+    const offsetY = (imgRect.top - wrapperRect.top);
+    const imgWidth = imgRect.width || 1;
+    const imgHeight = imgRect.height || 1;
+    startX = ((e.clientX - wrapperRect.left - offsetX) / imgWidth) * 100;
+    startY = ((e.clientY - wrapperRect.top - offsetY) / imgHeight) * 100;
+    
+    selectionBox.style.display = 'block';
+    selectionBox.style.left = startX + '%';
+    selectionBox.style.top = startY + '%';
+    selectionBox.style.width = '0%';
+    selectionBox.style.height = '0%';
+});
+
+                function handleSelectionMove(e) {
+    if(!isSelecting) return;
+    const wrapperRect = imgWrapper.getBoundingClientRect();
+    const imgRect = charImg.getBoundingClientRect();
+    const offsetX = (imgRect.left - wrapperRect.left);
+    const offsetY = (imgRect.top - wrapperRect.top);
+    const imgWidth = imgRect.width || 1;
+    const imgHeight = imgRect.height || 1;
+    const currX = Math.max(0, Math.min(100, ((e.clientX - wrapperRect.left - offsetX) / imgWidth) * 100));
+    const currY = Math.max(0, Math.min(100, ((e.clientY - wrapperRect.top - offsetY) / imgHeight) * 100));
+
+    const left = Math.min(startX, currX);
+    const top = Math.min(startY, currY);
+    const width = Math.abs(currX - startX);
+    const height = Math.abs(currY - startY);
+
+    selectionBox.style.left = left + '%';
+    selectionBox.style.top = top + '%';
+    selectionBox.style.width = width + '%';
+    selectionBox.style.height = height + '%';
+}
+
+                function handleSelectionEnd() {
+    if(!isSelecting) return;
+    isSelecting = false;
+    const w = parseFloat(selectionBox.style.width);
+    const h = parseFloat(selectionBox.style.height);
+    selectionBox.style.display = 'none';
+
+    if(w < 2 || h < 2) return;
+    
+    tempSpotData = {
+        top: parseFloat(parseFloat(selectionBox.style.top).toFixed(1)),
+        left: parseFloat(parseFloat(selectionBox.style.left).toFixed(1)),
+        width: parseFloat(w.toFixed(1)),
+        height: parseFloat(h.toFixed(1))
+    };
+    openEditor(-1);
+}
+
+if(USER_CONFIG.editMode) {
+    document.addEventListener('mousemove', handleSelectionMove);
+    document.addEventListener('mouseup', handleSelectionEnd);
+}
+            }
+
+            function initDropdown() {
+                ddList.innerHTML = '';
+                cocStats.forEach(stat => {
+                    const item = document.createElement('label');
+                    item.className = 'dropdown-item';
+                    item.innerHTML = `<input type="checkbox" value="${stat}"> <span>${stat}</span>`;
+                    item.querySelector('input').onchange = updateDropdownLabel;
+                    ddList.appendChild(item);
+                });
+
+                ddTrigger.onclick = (e) => {
+                    e.stopPropagation();
+                    ddList.classList.toggle('show');
+                };
+                
+                window.addEventListener('click', (e) => {
+                    if(!e.target.closest('.cyber-dropdown')) {
+                        ddList.classList.remove('show');
+                    }
+                });
+            }
+
+            function updateDropdownLabel() {
+                const checked = Array.from(ddList.querySelectorAll('input:checked')).map(cb => cb.value);
+                if(checked.length === 0) {
+                    ddTrigger.innerHTML = '<span class="dd-placeholder">선택 안함</span>';
+                } else {
+                    ddTrigger.innerHTML = checked.map(s => `<span class="dd-tag">${s}</span>`).join('');
+                }
+            }
+
+            window.openEditor = (index) => {
+    editingIndex = index;
+    editorModal.classList.add('active');
+    
+    let data = (index === -1) ? { title: '', desc: '', link: [] } : USER_CONFIG.hotspots[index];
+    
+    document.getElementById('ed_title').value = data.title;
+    document.getElementById('ed_desc').value = data.desc;
+    
+    ddList.querySelectorAll('input').forEach(cb => {
+        cb.checked = data.link && data.link.includes(cb.value);
+    });
+    updateDropdownLabel();
+};
+
+window.closeEditor = () => {
+    editorModal.classList.remove('active');
+    tempSpotData = null;
+};
+
+btnSaveSpot.onclick = () => {
+    const title = document.getElementById('ed_title').value;
+    const desc = document.getElementById('ed_desc').value;
+    const links = Array.from(ddList.querySelectorAll('input:checked')).map(cb => cb.value);
+
+    if(!title) {
+        alert("제목을 입력해주세요.");
+        return;
+    }
+
+    if(editingIndex === -1) {
+        if(tempSpotData) {
+            USER_CONFIG.hotspots.push({
+                ...tempSpotData,
+                title: title,
+                desc: desc || "내용 없음",
+                link: links
+            });
+        }
+    } else {
+        const spot = USER_CONFIG.hotspots[editingIndex];
+        spot.title = title;
+        spot.desc = desc;
+        spot.link = links;
+    }
+
+    closeEditor();
+    drawHotspots();
+};
+
+function initDevPanel() {
+    document.getElementById('editID').value = USER_CONFIG.meta.ID;
+    document.getElementById('editPosition').value = USER_CONFIG.meta.POSITION;
+    document.getElementById('editQuote').value = USER_CONFIG.meta.QUOTE;
+    document.getElementById('editLore').value = USER_CONFIG.lore; 
+    document.getElementById('editBgm').value = USER_CONFIG.bgm || "";
+    
+    const tColor = USER_CONFIG.themeColor || "#17F4E2";
+    const picker = document.getElementById('editThemeColor');
+    const preview = document.getElementById('themePreview');
+    picker.value = tColor;
+    const updatePreview = (color) => {
+        preview.style.background = color;
+        preview.innerText = color;
+        const r = parseInt(color.substring(1, 3), 16);
+        const g = parseInt(color.substring(3, 5), 16);
+        const b = parseInt(color.substring(5, 7), 16);
+        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        preview.style.color = (yiq >= 128) ? '#000' : '#fff';
+        preview.style.textShadow = (yiq >= 128) ? 'none' : '0 0 2px rgba(0,0,0,0.5)';
+    };
+    updatePreview(tColor);
+    picker.oninput = (e) => {
+        updatePreview(e.target.value);
+    };
+
+    const editImageUrl = document.getElementById('editImageUrl');
+    if(editImageUrl) {
+        editImageUrl.value = USER_CONFIG.imageUrl || "";
+        editImageUrl.oninput = (e) => {
+            const newUrl = e.target.value;
+            USER_CONFIG.imageUrl = newUrl;
+            charImg.src = newUrl;
+        };
+    }
+
+    const autoScaleCheck = document.getElementById('autoScaleCheck');
+    const scaleSlider = document.getElementById('scaleSlider');
+    const scaleValue = document.getElementById('scaleValue');
+    const manualSlider = document.getElementById('manualSlider');
+    const currentScale = document.getElementById('currentScale');
+    if(autoScaleCheck) {
+        autoScaleCheck.checked = USER_CONFIG.autoScale !== false;
+        autoScaleCheck.onchange = (e) => {
+            if(e.target.checked) {
+                const optimal = calculateOptimalScale();
+                scaleSlider.value = Math.round(optimal * 100);
+                scaleValue.textContent = Math.round(optimal * 100) + '%';
+                manualSlider.style.opacity = '0.5';
+                currentScale.textContent = Math.round(optimal * 100) + '% (자동)';
+                USER_CONFIG.autoScale = true;
+                USER_CONFIG.imageScale = null;
+            } else {
+                manualSlider.style.opacity = '1';
+                currentScale.textContent = scaleSlider.value + '% (수동)';
+                USER_CONFIG.autoScale = false;
+            }
+        };
+    }
+
+    if(scaleSlider) {
+        scaleSlider.oninput = (e) => {
+            const val = e.target.value;
+            scaleValue.textContent = val + '%';
+            currentScale.textContent = val + '% (수동)';
+            autoScaleCheck.checked = false;
+            manualSlider.style.opacity = '1';
+            USER_CONFIG.autoScale = false;
+            USER_CONFIG.imageScale = val / 100;
+        };
+    }
+
+    const statContainer = document.getElementById('statEditorContainer');
+    USER_CONFIG.stats.forEach((s, i) => {
+        const row = document.createElement('div');
+        row.className = 'input-row';
+        row.innerHTML = `
+            <span class="input-label">${s.label}</span>
+            <input type="number" min="0" max="100" value="${s.val}" class="input-field stat-input" data-idx="${i}">
+        `;
+        statContainer.appendChild(row);
+    });
+}
+
+function runExport() {
+    try {
+        const newMeta = {
+            "ID": document.getElementById('editID').value,
+            "POSITION": document.getElementById('editPosition').value, 
+            "QUOTE": document.getElementById('editQuote').value    
+        };
+        const newLore = document.getElementById('editLore').value;
+        const newBgm = document.getElementById('editBgm').value;
+        const newThemeColor = document.getElementById('editThemeColor').value;
+        const newImageUrl = document.getElementById('editImageUrl').value;
+
+        const autoScaleCheck = document.getElementById('autoScaleCheck');
+        const scaleSlider = document.getElementById('scaleSlider');
+        const finalAutoScale = autoScaleCheck ? autoScaleCheck.checked : true;
+        const finalImageScale = finalAutoScale ? null : (scaleSlider ? parseFloat(scaleSlider.value) / 100 : null);
+
+        const statInputs = document.querySelectorAll('.stat-input');
+        const newStats = [];
+        statInputs.forEach(input => {
+            const idx = input.getAttribute('data-idx');
+            if(USER_CONFIG.stats[idx]) {
+                newStats.push({
+                    label: USER_CONFIG.stats[idx].label,
+                    val: parseInt(input.value) || 0
+                });
+            }
+        });
+        const finalConfig = {
+            themeColor: newThemeColor, 
+            imageUrl: newImageUrl,
+            meta: newMeta,
+            lore: newLore,
+            bgm: newBgm,
+            stats: newStats,
+            hotspots: USER_CONFIG.hotspots,
+            imageScale: finalImageScale,
+            autoScale: finalAutoScale
+        };
+        const jsonStr = JSON.stringify(finalConfig, null, 4);
+        const codeStr = `<textarea id="gfx-raw-data" style="display:none;">\n${jsonStr}\n</textarea>`;
+        
+        if(outputBox) {
+            outputBox.value = codeStr;
+            alert("코드가 생성되었습니다!\n\n[적용 방법]\n생성된 <textarea>...</textarea> 전체를 복사해서,\nHTML 파일의 기존 <textarea id='gfx-raw-data'> 부분에 덮어쓰세요.");
+        } else {
+            console.log(codeStr);
+            alert("코드 박스를 찾을 수 없어 콘솔(F12)에 출력했습니다.");
+        }
+
+    } catch(e) {
+        alert("설정 내보내기 중 오류 발생: " + e.message);
+        console.error(e);
+    }
+}
+
+const exportBtn = document.getElementById('btn-export');
+if(exportBtn) {
+    exportBtn.addEventListener('click', runExport);
+} else {
+    console.warn("내보내기 버튼(btn-export)을 찾을 수 없습니다.");
+}
+
+const copyBtn = document.getElementById('btn-copy');
+if(copyBtn) {
+    copyBtn.onclick = () => {
+        const codeText = document.getElementById('codeOutput');
+        if(!codeText.value) {
+            alert("내보내기 된 코드가 없습니다. 먼저 [코드 내보내기]를 눌러주세요!");
+            return;
+        }
+        codeText.select();
+        codeText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(codeText.value).then(() => {
+            alert("코드가 복사되었습니다!\nHTML 파일에 붙여넣으세요.");
+        }).catch(err => {
+            alert("복사 실패: Ctrl+A로 전체 선택 후, Ctrl+C로 직접 긁어서 복사해주세요.");
+        });
+    };
+}
+
+function loadSettings() {
+    const savedColor = localStorage.getItem('gfx_color_v3');
+    const savedTheme = localStorage.getItem('gfx_theme_v3');
+    
+    const creatorColor = USER_CONFIG.themeColor || "#17F4E2";
+    const finalColor = savedColor || creatorColor;
+
+    updateColor(finalColor);
+    updateButtonTextColor(finalColor);
+    colorInput.value = finalColor;
+    if (savedTheme) {
+        root.setAttribute('data-theme', savedTheme);
+    }
+    renderArchive();
+}
+
+window.resetColor = () => {
+    if(confirm("테마를 기본 색상으로 되돌릴까요?")) {
+        localStorage.removeItem('gfx_color_v3');
+        const originalColor = USER_CONFIG.themeColor || "#17F4E2";
+        updateColor(originalColor);
+        colorInput.value = originalColor;
+    }
+};
+
+function updateColor(hex) {
+    root.style.setProperty('--sys-accent', hex);
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    root.style.setProperty('--sys-accent-alpha', `rgba(${r},${g},${b},0.2)`);
+}
+
+function triggerRipple(t, l) {
+    const p = document.createElement('div');
+    p.className = 'click-ripple';
+    p.style.top = t + "%";
+    p.style.left = l + "%";
+    triggerLayer.appendChild(p);
+    setTimeout(() => p.remove(), 500);
+}
+
+let typeTimer;
+window.closeHud = () => {
+    clearInterval(typeTimer);
+    hudWindow.classList.remove('active');
+    Object.values(statRows).forEach(el => el.classList.remove('glow'));
+};
+window.resetHudPos = () => {
+    hudWindow.style.transform = 'translate(-50%, -50%)';
+    hudWindow.style.left = '50%'; 
+    hudWindow.style.top = '50%';
+};
+
+function openHud(data) {
+    const statusTab = document.querySelector('[data-target="status"]');
+    if(!statusTab.classList.contains('active')) statusTab.click();
+    hudWindow.classList.add('active');
+    hudTitle.innerText = data.title;
+    Object.values(statRows).forEach(el => el.classList.remove('glow'));
+    if(data.link) data.link.forEach(k => { if(statRows[k]) statRows[k].classList.add('glow'); });
+    
+    clearInterval(typeTimer);
+    let i = 0;
+    
+    let targetText = data.desc;
+    if(targetText.includes('||')) {
+        const vars = targetText.split('||');
+        targetText = vars[Math.floor(Math.random() * vars.length)];
+    }
+
+    hudText.innerHTML = '<span class="typing-cursor">_</span>';
+    typeTimer = setInterval(() => {
+        const txt = targetText.slice(0, ++i);
+        hudText.innerText = txt;
+        hudText.insertAdjacentHTML('beforeend', '<span class="typing-cursor">_</span>');
+        if(i >= targetText.length) clearInterval(typeTimer);
+    }, 25);
+}
+
+let isDragging = false, dragStartX, dragStartY, initialLeft, initialTop;
+hudHeader.addEventListener("mousedown", dragStart);
+hudHeader.addEventListener("touchstart", dragStart, {passive: false});
+document.addEventListener("mouseup", dragEnd);
+document.addEventListener("touchend", dragEnd);
+document.addEventListener("mousemove", drag);
+document.addEventListener("touchmove", drag, {passive: false});
+
+function dragStart(e) {
+    if(e.target.classList.contains('hud-close')) return;
+    isDragging = true;
+    
+    const rect = hudWindow.getBoundingClientRect();
+    const parentRect = stage.getBoundingClientRect();
+    const realLeft = rect.left - parentRect.left;
+    const realTop = rect.top - parentRect.top;
+
+    hudWindow.style.transform = 'none';
+    hudWindow.style.left = realLeft + 'px';
+    hudWindow.style.top = realTop + 'px';
+    initialLeft = realLeft;
+    initialTop = realTop;
+
+    const cx = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    const cy = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    dragStartX = cx; 
+    dragStartY = cy;
+}
+function dragEnd() { isDragging = false; }
+function drag(e) {
+    if(!isDragging) return;
+    e.preventDefault();
+    const cx = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    const cy = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    hudWindow.style.left = (initialLeft + (cx - dragStartX)) + 'px';
+    hudWindow.style.top = (initialTop + (cy - dragStartY)) + 'px';
+}
+
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page-view');
+navItems.forEach(n => {
+    n.onclick = () => {
+        navItems.forEach(i => i.classList.remove('active'));
+        pages.forEach(p => p.classList.remove('active'));
+        n.classList.add('active');
+        document.getElementById('view-' + n.dataset.target).classList.add('active');
+    };
+});
+
+colorInput.addEventListener('input', (e) => {
+    const hex = e.target.value;
+    updateColor(hex);
+    localStorage.setItem('gfx_color_v3', hex);
+    updateButtonTextColor(hex);
+});
+
+function updateButtonTextColor(hex) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    
+    const btnSave = document.querySelector('.btn-save');
+    if(btnSave) {
+        btnSave.style.color = brightness > 128 ? '#000' : '#fff';
+    }
+}
+
+themeBtn.onclick = () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('gfx_theme_v3', next);
+};
+
+loadSettings();
+        })();
+    </script>
+</body>
+</html>
